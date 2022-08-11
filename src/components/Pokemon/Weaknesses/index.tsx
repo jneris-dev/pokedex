@@ -1,13 +1,11 @@
 import React, { SVGProps, useEffect, useState } from "react";
-
 import { getTypeWeaknesses } from 'poke-types'
 
-import api from "../../../services/api";
 import iconTypePokemon from '../../Types';
 
 interface PokemonTypesProps {
-    name: string;
-    effect?: number;
+    name?: string;
+    effect: number;
     icon: SVGProps<SVGSVGElement>;
     color: {
         background: string,
@@ -17,20 +15,6 @@ interface PokemonTypesProps {
 
 interface Props {
     pokemon: {
-        id: number;
-        number: string;
-        image: string;
-        specie: string;
-        height: string;
-        weight: string;
-        stats: {
-            hp: number;
-            attack: number;
-            defense: number;
-            speed: number;
-            specialAttack: number;
-            specialDefense: number;
-        };
         type: PokemonTypesProps[];
     }
 }

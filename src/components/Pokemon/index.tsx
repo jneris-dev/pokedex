@@ -18,6 +18,7 @@ interface PokemonDetailProps {
 
 export interface PokemonTypesProps {
     name?: string;
+    effect: number;
     icon: SVGProps<SVGSVGElement>;
     color: {
         background: string,
@@ -148,6 +149,14 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
             if (types[0].type.name === 'normal' && types.length > 1) {
                 setBackgroundColor(types[1].type.name);
             }
+
+            const faviconUpdate = async () => {
+                const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
+                if (favicon != null) {
+                    favicon.href = sprites.versions["generation-vii"].icons.front_default
+                }
+            };
+            faviconUpdate();
 
             setPokemon({
                 id,
