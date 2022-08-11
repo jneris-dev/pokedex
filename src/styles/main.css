@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-zinc-100 text-zinc-800;
+}
+
+.bg-pokeball > svg {
+    @apply fixed inset-0 my-0 mx-auto -z-10 h-screen w-auto fill-zinc-200;
+}
+
+.bg-pokeball > svg {
+    @apply fixed inset-0 my-0 mx-auto -z-10 h-screen w-auto fill-zinc-200;
+}
+
+.type-pokemon > svg {
+    @apply w-[12px] h-[12px] fill-zinc-100;
+}
+
+.poke-card > svg {
+    @apply absolute right-3 top-0 w-[180px] h-[180px] fill-zinc-200 opacity-20;
+}
+
+figure > svg {
+    @apply fill-zinc-200;
+}
+
+.weaknesses-type-pokemon > svg {
+    @apply w-[15px] h-[15px] fill-zinc-100;
+}
+
+.figure-poke > svg {
+    @apply absolute inset-0 w-full h-full -z-10
+}
+
+.figure-varieties-poke > svg {
+    @apply absolute inset-0 w-full h-full fill-zinc-200
+}
