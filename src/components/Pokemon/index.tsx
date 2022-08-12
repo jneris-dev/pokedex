@@ -1,7 +1,9 @@
-import { SVGProps, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import iconTypePokemon from '../Types';
 import api from "../../services/api";
+import { PokemonTypeMap } from '../../util/pokemonTypeMap';
+import { PokemonProps, TypePokemonResponse } from "../../interfaces/interfaces";
+import iconTypePokemon from '../../util/Types';
 
 import Pokeball from "../Pokeball";
 import { About } from "./About";
@@ -17,123 +19,9 @@ interface PokemonDetailProps {
     showDetail: (value: string) => void;
 }
 
-export interface PokemonTypesProps {
-    name?: string;
-    effect: number;
-    icon: SVGProps<SVGSVGElement>;
-    color: {
-        background: string,
-        type: string
-    };
-}
-
-export interface PokemonProps {
-    id: number;
-    number: string;
-    image: string;
-    shiny: string;
-    shiny_f: string;
-    specie: string;
-    height: string;
-    weight: string;
-    stats: {
-        hp: number;
-        attack: number;
-        defense: number;
-        speed: number;
-        specialAttack: number;
-        specialDefense: number;
-    };
-    type: PokemonTypesProps[];
-}
-
-interface TypePokemonResponse {
-    type: {
-        name: keyof typeof iconTypePokemon;
-    };
-}
-
-const PokemonTypeMap = {
-    bug: {
-        background: 'bg-backgroundType-bug',
-        type: 'bg-types-bug'
-    },
-    dark: {
-        background: 'bg-backgroundType-dark',
-        type: 'bg-types-dark'
-    },
-    dragon: {
-        background: 'bg-backgroundType-dragon',
-        type: 'bg-types-dragon'
-    },
-    electric: {
-        background: 'bg-backgroundType-electric',
-        type: 'bg-types-electric'
-    },
-    fairy: {
-        background: 'bg-backgroundType-fairy',
-        type: 'bg-types-fairy'
-    },
-    fighting: {
-        background: 'bg-backgroundType-fighting',
-        type: 'bg-types-fighting'
-    },
-    fire: {
-        background: 'bg-backgroundType-fire',
-        type: 'bg-types-fire'
-    },
-    flying: {
-        background: 'bg-backgroundType-flying',
-        type: 'bg-types-flying'
-    },
-    ghost: {
-        background: 'bg-backgroundType-ghost',
-        type: 'bg-types-ghost'
-    },
-    grass: {
-        background: 'bg-backgroundType-grass',
-        type: 'bg-types-grass'
-    },
-    ground: {
-        background: 'bg-backgroundType-ground',
-        type: 'bg-types-ground'
-    },
-    ice: {
-        background: 'bg-backgroundType-ice',
-        type: 'bg-types-ice'
-    },
-    normal: {
-        background: 'bg-backgroundType-normal',
-        type: 'bg-types-normal'
-    },
-    poison: {
-        background: 'bg-backgroundType-poison',
-        type: 'bg-types-poison'
-    },
-    psychic: {
-        background: 'bg-backgroundType-psychic',
-        type: 'bg-types-psychic'
-    },
-    rock: {
-        background: 'bg-backgroundType-rock',
-        type: 'bg-types-rock'
-    },
-    steel: {
-        background: 'bg-backgroundType-steel',
-        type: 'bg-types-steel'
-    },
-    water: {
-        background: 'bg-backgroundType-water',
-        type: 'bg-types-water'
-    },
-}
-
 export function Pokemon({ name, showDetail }: PokemonDetailProps) {
 
     const [pokemon, setPokemon] = useState({} as PokemonProps);
-    const [backgroundColor, setBackgroundColor] = useState<
-        keyof typeof iconTypePokemon
-    >('normal');
 
     useEffect(() => {
         api.get(`/pokemon/${name}`).then(response => {
@@ -146,12 +34,6 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
                 types,
                 species,
             } = response.data;
-
-            setBackgroundColor(types[0].type.name);
-
-            if (types[0].type.name === 'normal' && types.length > 1) {
-                setBackgroundColor(types[1].type.name);
-            }
 
             const faviconUpdate = async () => {
                 const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
@@ -224,27 +106,62 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
             </header>
             <div className="w-full h-auto relative gap-5 flex flex-row max-w-[1220px] mx-auto">
                 <div className="w-full flex flex-col gap-5">
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Pokédex Data
+                            </h3>
+                        </div>
                         <About pokemon={pokemon} />
                     </div>
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Training
+                            </h3>
+                        </div>
                         <Training pokemon={pokemon} />
                     </div>
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Varieties
+                            </h3>
+                        </div>
                         <Forms pokemon={pokemon} name={name} showDetail={showDetail} />
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-8">
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Weaknesses
+                            </h3>
+                        </div>
                         <Weaknesses pokemon={pokemon} />
                     </div>
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                ✨Shiny
+                            </h3>
+                        </div>
                         <Shiny name={name} pokemon={pokemon} />
                     </div>
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Evolution
+                            </h3>
+                        </div>
                         <Evolves name={name} showDetail={showDetail} pokemon={pokemon} />
                     </div>
-                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type[0].color.text}`}>
+                                Base Stats
+                            </h3>
+                        </div>
                         <Stats pokemon={pokemon} />
                     </div>
                 </div>

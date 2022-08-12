@@ -34,38 +34,31 @@ export function Training({ pokemon }: Props) {
     }, [pokemon]);
 
     return (
-        <>
-            <div className="w-full p-3 border-b">
-                <h3 className="text-lg font-bold">
-                    Training
-                </h3>
-            </div>
-            <ul className="w-full p-3 flex flex-col gap-3">
-                <li className="w-full flex flex-row gap-3">
-                    <strong className="text-zinc-500">
-                        Catch Rate:
-                    </strong>
-                    <span className="capitalize font-medium">
-                        {pokemonSpecie.capture_rate}
-                    </span>
-                </li>
-                <li className="w-full flex flex-row gap-3">
-                    <strong className="text-zinc-500">
-                        Base Friendship:
-                    </strong>
-                    <span className="font-medium">
-                        {pokemonSpecie.base_happiness}
-                    </span>
-                </li>
-                <li className="w-full flex flex-row gap-3">
-                    <strong className="text-zinc-500">
-                        Growth Rate:
-                    </strong>
-                    <span className="font-medium">
-                        {pokemonSpecie.growth_rate}
-                    </span>
-                </li>
-            </ul>
-        </>
+        <ul className="w-full p-3 flex flex-col gap-3">
+            <li className="w-full flex flex-row gap-3">
+                <strong className="text-zinc-500">
+                    Catch Rate:
+                </strong>
+                <span className="capitalize font-medium">
+                    {pokemonSpecie.capture_rate}
+                </span>
+            </li>
+            <li className="w-full flex flex-row gap-3">
+                <strong className="text-zinc-500">
+                    Base Friendship:
+                </strong>
+                <span className="font-medium">
+                    {pokemonSpecie.base_happiness}
+                </span>
+            </li>
+            <li className="w-full flex flex-row gap-3">
+                <strong className="text-zinc-500">
+                    Growth Rate:
+                </strong>
+                <span className="font-medium">
+                    {pokemonSpecie.growth_rate}
+                </span>
+            </li>
+        </ul>
     );
 }

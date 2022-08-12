@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import api from "../../../services/api";
 import { Varieties } from "./Varieties";
 
@@ -35,11 +36,6 @@ export function Forms({ pokemon, name, showDetail }: Props) {
 
     return (
         <>
-            <div className="w-full p-3 border-b">
-                <h3 className="text-lg font-bold">
-                    Varieties
-                </h3>
-            </div>
             {pokemonForms.length > 1 ?
                 <div className="grid grid-cols-3 gap-10 p-5">
                     {pokemonForms.map((varieties, index) => (

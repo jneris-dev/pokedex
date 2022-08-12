@@ -11,11 +11,6 @@ interface Props {
 export function Shiny({ name, pokemon }: Props) {
     return (
         <>
-            <div className="w-full p-3 border-b">
-                <h3 className="text-lg font-bold">
-                    ✨Shiny
-                </h3>
-            </div>
             {pokemon.shiny ?
                 <div className="grid grid-cols-3 gap-10 p-5">
                     <figure className="block mx-auto relative figure-varieties-poke">

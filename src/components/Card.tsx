@@ -1,111 +1,19 @@
-import { useState, useEffect, SVGProps } from 'react';
+import { useState, useEffect } from 'react';
 
+import { PokemonCardProps } from '../interfaces/interfaces';
 import api from '../services/api';
+import { PokemonTypeMap } from '../util/pokemonTypeMap';
+import iconTypePokemon from '../util/Types';
+
 import Pokeball from './Pokeball';
-import iconTypePokemon from './Types';
 
 interface CardProps {
     name: string;
     showDetail: (value: string) => void;
 }
 
-interface PokemonTypesProps {
-    name: string;
-    color: {
-        background: string,
-        type: string
-    };
-    icon: SVGProps<SVGSVGElement>;
-}
-
-interface PokemonProps {
-    id: string;
-    image: string;
-    gif: string;
-    type: PokemonTypesProps[];
-    backgroundColor: {
-        background: string,
-        type: string
-    };
-}
-
-const PokemonTypeMap = {
-    bug: {
-        background: 'bg-backgroundType-bug',
-        type: 'bg-types-bug'
-    },
-    dark: {
-        background: 'bg-backgroundType-dark',
-        type: 'bg-types-dark'
-    },
-    dragon: {
-        background: 'bg-backgroundType-dragon',
-        type: 'bg-types-dragon'
-    },
-    electric: {
-        background: 'bg-backgroundType-electric',
-        type: 'bg-types-electric'
-    },
-    fairy: {
-        background: 'bg-backgroundType-fairy',
-        type: 'bg-types-fairy'
-    },
-    fighting: {
-        background: 'bg-backgroundType-fighting',
-        type: 'bg-types-fighting'
-    },
-    fire: {
-        background: 'bg-backgroundType-fire',
-        type: 'bg-types-fire'
-    },
-    flying: {
-        background: 'bg-backgroundType-flying',
-        type: 'bg-types-flying'
-    },
-    ghost: {
-        background: 'bg-backgroundType-ghost',
-        type: 'bg-types-ghost'
-    },
-    grass: {
-        background: 'bg-backgroundType-grass',
-        type: 'bg-types-grass'
-    },
-    ground: {
-        background: 'bg-backgroundType-ground',
-        type: 'bg-types-ground'
-    },
-    ice: {
-        background: 'bg-backgroundType-ice',
-        type: 'bg-types-ice'
-    },
-    normal: {
-        background: 'bg-backgroundType-normal',
-        type: 'bg-types-normal'
-    },
-    poison: {
-        background: 'bg-backgroundType-poison',
-        type: 'bg-types-poison'
-    },
-    psychic: {
-        background: 'bg-backgroundType-psychic',
-        type: 'bg-types-psychic'
-    },
-    rock: {
-        background: 'bg-backgroundType-rock',
-        type: 'bg-types-rock'
-    },
-    steel: {
-        background: 'bg-backgroundType-steel',
-        type: 'bg-types-steel'
-    },
-    water: {
-        background: 'bg-backgroundType-water',
-        type: 'bg-types-water'
-    },
-}
-
 export function Card({ name, showDetail }: CardProps) {
-    const [pokemon, setPokemon] = useState({} as PokemonProps);
+    const [pokemon, setPokemon] = useState({} as PokemonCardProps);
 
     useEffect(() => {
         api.get(`/pokemon/${name}`).then(response => {
@@ -119,7 +27,6 @@ export function Card({ name, showDetail }: CardProps) {
 
             setPokemon({
                 id,
-                backgroundColor: PokemonTypeMap[typeColor],
                 image: sprites.other['official-artwork'].front_default,
                 gif: sprites.versions['generation-v']["black-white"].animated.front_default,
                 type: types.map((pokemonType: any) => {

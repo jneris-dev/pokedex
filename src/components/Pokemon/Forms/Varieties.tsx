@@ -1,7 +1,11 @@
-import { SVGProps, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import api from "../../../services/api";
+import { PokemonTypeMap } from '../../../util/pokemonTypeMap';
+import iconTypePokemon from '../../../util/Types';
+import { PokemonTypesProps } from "../../../interfaces/interfaces";
+
 import Pokeball from "../../Pokeball";
-import iconTypePokemon from '../../Types';
 
 interface Props {
     pokemon: {
@@ -15,90 +19,6 @@ interface PokemonVarietiesProps {
     number: string;
     image: string;
     type: PokemonTypesProps[];
-}
-
-interface PokemonTypesProps {
-    name: string;
-    color: {
-        background: string,
-        type: string
-    };
-    icon: SVGProps<SVGSVGElement>;
-}
-
-const PokemonTypeMap = {
-    bug: {
-        background: 'bg-backgroundType-bug',
-        type: 'bg-types-bug'
-    },
-    dark: {
-        background: 'bg-backgroundType-dark',
-        type: 'bg-types-dark'
-    },
-    dragon: {
-        background: 'bg-backgroundType-dragon',
-        type: 'bg-types-dragon'
-    },
-    electric: {
-        background: 'bg-backgroundType-electric',
-        type: 'bg-types-electric'
-    },
-    fairy: {
-        background: 'bg-backgroundType-fairy',
-        type: 'bg-types-fairy'
-    },
-    fighting: {
-        background: 'bg-backgroundType-fighting',
-        type: 'bg-types-fighting'
-    },
-    fire: {
-        background: 'bg-backgroundType-fire',
-        type: 'bg-types-fire'
-    },
-    flying: {
-        background: 'bg-backgroundType-flying',
-        type: 'bg-types-flying'
-    },
-    ghost: {
-        background: 'bg-backgroundType-ghost',
-        type: 'bg-types-ghost'
-    },
-    grass: {
-        background: 'bg-backgroundType-grass',
-        type: 'bg-types-grass'
-    },
-    ground: {
-        background: 'bg-backgroundType-ground',
-        type: 'bg-types-ground'
-    },
-    ice: {
-        background: 'bg-backgroundType-ice',
-        type: 'bg-types-ice'
-    },
-    normal: {
-        background: 'bg-backgroundType-normal',
-        type: 'bg-types-normal'
-    },
-    poison: {
-        background: 'bg-backgroundType-poison',
-        type: 'bg-types-poison'
-    },
-    psychic: {
-        background: 'bg-backgroundType-psychic',
-        type: 'bg-types-psychic'
-    },
-    rock: {
-        background: 'bg-backgroundType-rock',
-        type: 'bg-types-rock'
-    },
-    steel: {
-        background: 'bg-backgroundType-steel',
-        type: 'bg-types-steel'
-    },
-    water: {
-        background: 'bg-backgroundType-water',
-        type: 'bg-types-water'
-    },
 }
 
 export function Varieties({ pokemon, showDetail }: Props) {
