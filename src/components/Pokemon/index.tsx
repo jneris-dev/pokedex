@@ -10,6 +10,7 @@ import { Weaknesses } from "./Weaknesses";
 import { Stats } from "./Stats";
 import { Forms } from "./Forms";
 import { Evolves } from "./Evolves";
+import { Shiny } from "./Shiny";
 
 interface PokemonDetailProps {
     name: string;
@@ -30,6 +31,8 @@ export interface PokemonProps {
     id: number;
     number: string;
     image: string;
+    shiny: string;
+    shiny_f: string;
     specie: string;
     height: string;
     weight: string;
@@ -153,7 +156,7 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
             const faviconUpdate = async () => {
                 const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
                 if (favicon != null) {
-                    favicon.href = sprites.versions["generation-vii"].icons.front_default
+                    favicon.href = sprites.versions["generation-viii"].icons.front_default
                 }
             };
             faviconUpdate();
@@ -161,9 +164,9 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
             setPokemon({
                 id,
                 number: `#${'000'.substr(id.toString().length)}${id}`,
-                image:
-                    sprites.other['official-artwork'].front_default ||
-                    sprites.front_default,
+                image: sprites.other['official-artwork'].front_default || sprites.front_default,
+                shiny: sprites.other.home.front_shiny,
+                shiny_f: sprites.other.home.front_shiny_female,
                 weight: `${weight / 10} kg`,
                 specie: species.name,
                 height: `${height / 10} m`,
@@ -234,6 +237,9 @@ export function Pokemon({ name, showDetail }: PokemonDetailProps) {
                 <div className="w-full flex flex-col gap-8">
                     <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
                         <Weaknesses pokemon={pokemon} />
+                    </div>
+                    <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
+                        <Shiny name={name} pokemon={pokemon} />
                     </div>
                     <div className="bg-white rounded-md shadow-md p-3 border-t-4 border-t-zinc-600">
                         <Evolves name={name} showDetail={showDetail} pokemon={pokemon} />

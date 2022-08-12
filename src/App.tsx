@@ -13,7 +13,7 @@ interface PokemonProps {
 
 function App() {
 	const NUMBER_POKEMONS = 25;
-	const NUMBER_MAX_POKEMONS_API = 1154;
+	const NUMBER_MAX_POKEMONS_API = 929;
 
 	const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
 	const [pokemonSearch, setPokemonSearch] = useState('');

@@ -46,11 +46,12 @@ export function Stats({ pokemon }: Props) {
                                     <div
                                         className={`
                                             h-2.5 rounded-full
-                                            ${pokemon.stats[stat.field] <= 50 ? "bg-red-600" :
-                                                pokemon.stats[stat.field] <= 99 ? "bg-orange-600" :
-                                                    pokemon.stats[stat.field] <= 124 ? "bg-yellow-600" :
-                                                        pokemon.stats[stat.field] <= 199 ? "bg-green-600" :
-                                                            pokemon.stats[stat.field] >= 200 && "bg-blue-600"
+                                            ${pokemon.stats[stat.field] <= 25 ? "bg-red-500" :
+                                                pokemon.stats[stat.field] <= 59 ? "bg-orange-500" :
+                                                    pokemon.stats[stat.field] <= 89 ? "bg-yellow-500" :
+                                                        pokemon.stats[stat.field] <= 119 ? "bg-lime-500" :
+                                                            pokemon.stats[stat.field] <= 149 ? "bg-green-500" :
+                                                                pokemon.stats[stat.field] >= 150 && "bg-cyan-500"
                                             }
                                         `}
                                         style={{ width: `${pokemon.stats[stat.field] < 200 ? (pokemon.stats[stat.field] / 200) * 100 : 200}%` }}

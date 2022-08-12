@@ -194,7 +194,8 @@ export function Evolves({ pokemon, name, showDetail }: Props) {
                         <div key={index}>
                             <div>
                                 <figure
-                                    className="block mx-auto relative figure-varieties-poke"
+                                    className="block mx-auto relative figure-varieties-poke cursor-pointer"
+                                    onClick={() => showDetail(evolves.name)}
                                 >
                                     <img
                                         src={evolves.image}
