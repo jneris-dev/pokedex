@@ -37,7 +37,7 @@ export function Forms({ pokemon, name, showDetail }: Props) {
     return (
         <>
             {pokemonForms.length > 1 ?
-                <div className="grid grid-cols-3 gap-10 p-5">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
                     {pokemonForms.map((varieties, index) => (
                         <Varieties
                             key={index}

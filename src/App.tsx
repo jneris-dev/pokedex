@@ -21,6 +21,9 @@ function App() {
 		sessionStorage.getItem('pokemon') || 'bulbasaur'
 	);
 	const [pokemonsOffsetApi, setPokemonsOffsetApi] = useState(NUMBER_POKEMONS);
+	const [openMenu, setOpenMenu] = useState(
+		window.innerWidth > 1024 ? true : false
+	);
 
 	const handleSearchPokemons = useCallback(async () => {
 		const response = await api.get(`/pokemon?limit=${NUMBER_MAX_POKEMONS_API}`);
@@ -69,8 +72,11 @@ function App() {
 	}
 
 	return (
-		<main className="w-full relative flex flex-row">
-			<aside className="w-full max-w-[400px] fixed left-0 top-0 h-screen overflow-y-scroll scrollbar pb-5 bg-white shadow-lg divide-y-2 z-10">
+		<main className="w-full relative flex flex-row items-stretch">
+			<aside className={`
+				w-full sm:max-w-[350px] max-w-[300px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-white shadow-lg divide-y-2 
+				${openMenu ? "ml-0" : "-ml-[350px]"}
+			`}>
 				<Search
 					value={pokemonSearch}
 					onChange={setPokemonSearch}
@@ -80,6 +86,8 @@ function App() {
 						key={pokemon.name}
 						name={pokemon.name}
 						showDetail={handlePokemonDetail}
+						switchMenu={setOpenMenu}
+						stateMenu={openMenu}
 					/>
 				))}
 				{pokemonSearch.length <= 2 && (
@@ -95,10 +103,20 @@ function App() {
 				)}
 			</aside>
 
-			<section className="h-screen flex flex-col items-center w-[calc(100%-440px)] ml-auto">
+			<div
+				className={`lg:hidden w-screen h-screen fixed z-20 inset-0 bg-white bg-opacity-50 ${openMenu ? 'visible' : 'invisible'}`}
+				onClick={() => setOpenMenu(!openMenu)}
+			/>
+
+			<section className={`
+				flex flex-col items-center transition-all duration-500 ml-auto h-screen
+				${openMenu ? "lg:w-[calc(100%-350px)] lg:overflow-auto overflow-hidden" : "w-full overflow-auto"}
+			`}>
 				<Pokemon
 					name={pokemonDetail}
 					showDetail={handlePokemonDetail}
+					switchMenu={setOpenMenu}
+					stateMenu={openMenu}
 				/>
 			</section>
 		</main>

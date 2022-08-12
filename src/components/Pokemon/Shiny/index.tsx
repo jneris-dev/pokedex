@@ -12,7 +12,7 @@ export function Shiny({ name, pokemon }: Props) {
     return (
         <>
             {pokemon.shiny ?
-                <div className="grid grid-cols-3 gap-10 p-5">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
                     <figure className="block mx-auto relative figure-varieties-poke">
                         <img
                             src="https://pokemon.gameinfo.io/images/male_shiny_l.png"
@@ -45,7 +45,7 @@ export function Shiny({ name, pokemon }: Props) {
                 :
                 <div className="p-3">
                     <p className="capitalize font-medium">
-                        <strong>{name}</strong> currently has no different forms.
+                        <strong>{name}</strong> currently has no shiny forms.
                     </p>
                 </div>
             }

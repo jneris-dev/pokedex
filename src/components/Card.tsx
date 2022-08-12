@@ -10,10 +10,17 @@ import Pokeball from './Pokeball';
 interface CardProps {
     name: string;
     showDetail: (value: string) => void;
+    switchMenu: (value: boolean) => void;
+    stateMenu: boolean;
 }
 
-export function Card({ name, showDetail }: CardProps) {
+export function Card({ name, showDetail, switchMenu, stateMenu }: CardProps) {
     const [pokemon, setPokemon] = useState({} as PokemonCardProps);
+
+    function moreAboutPokemon() {
+        showDetail(name)
+        switchMenu(!stateMenu)
+    }
 
     useEffect(() => {
         api.get(`/pokemon/${name}`).then(response => {
@@ -44,7 +51,7 @@ export function Card({ name, showDetail }: CardProps) {
     return (
         <div
             className={`poke-card w-full mx-auto flex items-center p-4 relative gap-4 flex-row hover:bg-zinc-100 hover:cursor-pointer`}
-            onClick={() => showDetail(name)}
+            onClick={() => moreAboutPokemon()}
         >
             <figure className="min-w-[82px]">
                 {pokemon.image ? (
