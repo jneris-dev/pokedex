@@ -22,6 +22,7 @@ export interface PokemonCardProps {
 
 
 export interface PokemonProps {
+    name: string;
     id: number;
     number: string;
     image: string;

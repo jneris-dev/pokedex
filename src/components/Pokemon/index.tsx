@@ -38,16 +38,9 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                 species,
             } = response.data;
 
-            const faviconUpdate = async () => {
-                const favicon = document.getElementById("favicon") as HTMLLinkElement | null;
-                if (favicon != null) {
-                    favicon.href = sprites.versions["generation-viii"].icons.front_default
-                }
-            };
-            faviconUpdate();
-
             setPokemon({
                 id,
+                name: name,
                 number: `#${'000'.substr(id.toString().length)}${id}`,
                 image: sprites.other['official-artwork'].front_default || sprites.front_default,
                 shiny: sprites.other.home.front_shiny,

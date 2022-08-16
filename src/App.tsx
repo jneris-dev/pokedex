@@ -32,7 +32,7 @@ function App() {
 		const pokemonsSearch = response.data.results.filter(
 			({ name }: PokemonProps) => name.includes(pokemonSearch),
 		);
-		setPokemons(pokemonsSearch);
+		setPokemons(pokemonsSearch)
 	}, [pokemonSearch]);
 
 	const handlePokemonsListDefault = useCallback(async () => {

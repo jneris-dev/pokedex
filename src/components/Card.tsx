@@ -19,7 +19,8 @@ export function Card({ name, showDetail, switchMenu, stateMenu }: CardProps) {
 
     function moreAboutPokemon() {
         showDetail(name)
-        switchMenu(!stateMenu)
+        if (window.innerWidth < 1024)
+            switchMenu(!stateMenu)
     }
 
     useEffect(() => {
