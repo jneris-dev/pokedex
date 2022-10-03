@@ -69,6 +69,8 @@ function App() {
 	function handlePokemonDetail(name: string) {
 		setPokemonDetail(name)
 		sessionStorage.setItem('pokemon', name);
+
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
 	return (

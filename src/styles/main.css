@@ -10,10 +10,6 @@ body {
     @apply fixed inset-0 my-0 mx-auto -z-10 h-screen w-auto fill-zinc-200;
 }
 
-.bg-pokeball > svg {
-    @apply fixed inset-0 my-0 mx-auto -z-10 h-screen w-auto fill-zinc-200;
-}
-
 .type-pokemon > svg {
     @apply w-[12px] h-[12px] fill-zinc-100;
 }
@@ -26,8 +22,8 @@ figure > svg {
     @apply fill-zinc-200;
 }
 
-.weaknesses-type-pokemon > svg {
-    @apply w-[15px] h-[15px] fill-zinc-100;
+.type-single-pokemon > svg {
+    @apply w-[18px] h-[18px] fill-zinc-100;
 }
 
 .figure-poke > svg {
