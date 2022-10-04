@@ -104,7 +104,7 @@ export function Evolves({ pokemon, name, showDetail }: Props) {
     return (
         <>
             {evolvesPokemon.length > 1 ? (
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
+                <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
                     {evolvesPokemon.slice(0, 6).map((evolves, index) => (
                         <div key={index}>
                             <div>

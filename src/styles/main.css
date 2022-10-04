@@ -23,7 +23,11 @@ figure > svg {
 }
 
 .type-single-pokemon > svg {
-    @apply w-[18px] h-[18px] fill-zinc-100;
+    @apply w-[15px] h-[15px] fill-zinc-100;
+}
+
+.weaknesses-type-pokemon > svg {
+    @apply w-[15px] h-[15px] fill-zinc-100;
 }
 
 .figure-poke > svg {

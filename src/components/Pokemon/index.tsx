@@ -14,6 +14,7 @@ import { Forms } from "./Forms";
 import { Evolves } from "./Evolves";
 import { Shiny } from "./Shiny";
 import { Type } from "./Type";
+import { Weaknesses } from "./Weaknesses";
 
 interface PokemonDetailProps {
     name: string;
@@ -109,7 +110,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                 </h2>
             </header>
             <div className="w-full h-auto relative gap-5 flex md:flex-row flex-col max-w-[1024px] mx-auto">
-                <div className="w-full flex flex-col gap-5 md:order-1 order-2">
+                <div className="w-full flex flex-col gap-5">
                     <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
                         <div className="w-full p-3 border-b">
                             <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
@@ -135,7 +136,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                         <Stats pokemon={pokemon} />
                     </div>
                 </div>
-                <div className="w-full flex flex-col gap-5 md:order-2 order-1">
+                <div className="w-full flex flex-col gap-5">
                     <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
                         <div className="w-full p-3 border-b">
                             <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
@@ -143,6 +144,14 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                             </h3>
                         </div>
                         <Type pokemon={pokemon} />
+                    </div>
+                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b">
+                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                                Weaknesses
+                            </h3>
+                        </div>
+                        <Weaknesses pokemon={pokemon} />
                     </div>
                     <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
                         <div className="w-full p-3 border-b">

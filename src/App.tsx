@@ -45,11 +45,8 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		const isSearch = pokemonSearch.length >= 2;
-
-		if (isSearch) handleSearchPokemons();
-		else handlePokemonsListDefault();
-	}, [pokemonSearch, handlePokemonsListDefault, handleSearchPokemons]);
+		pokemonSearch.length >= 2 ? handleSearchPokemons() : handlePokemonsListDefault();
+	}, [pokemonSearch]);
 
 	const handleMorePokemons = useCallback(
 		async (offset: any) => {
@@ -92,7 +89,7 @@ function App() {
 						stateMenu={openMenu}
 					/>
 				))}
-				{pokemonSearch.length <= 2 && (
+				{pokemonSearch.length < 0 && (
 					<div className="w-full py-5 px-4">
 						<button
 							type="button"
@@ -111,7 +108,7 @@ function App() {
 			/>
 
 			<section className={`
-				flex flex-col items-center transition-all duration-500 ml-auto h-screen
+				flex flex-col items-center transition-all duration-500 ml-auto
 				${openMenu ? "lg:w-[calc(100%-350px)] lg:overflow-auto overflow-hidden" : "w-full overflow-auto"}
 			`}>
 				<Pokemon

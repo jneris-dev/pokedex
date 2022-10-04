@@ -2,7 +2,7 @@ import { SVGProps } from "react";
 import iconTypePokemon from '../util/Types';
 
 export interface PokemonTypesProps {
-    name?: string;
+    name: string;
     effect: number;
     icon: SVGProps<SVGSVGElement>;
     color: {
