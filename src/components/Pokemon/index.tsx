@@ -13,7 +13,6 @@ import { Stats } from "./Stats";
 import { Forms } from "./Forms";
 import { Evolves } from "./Evolves";
 import { Shiny } from "./Shiny";
-import { Type } from "./Type";
 import { Weaknesses } from "./Weaknesses";
 
 interface PokemonDetailProps {
@@ -90,6 +89,9 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                         className="cursor-pointer"
                         onClick={() => switchMenu(!stateMenu)}
                     />
+                    <div className="sm:w-12 w-9 sm:h-w-12 h-9 rounded-full overflow-hidden ring-2 ring-offset-2 ring-zinc-300 transition-all grayscale cursor-not-allowed hover:ring-zinc-400">
+                        <img src="https://avatars.githubusercontent.com/jneris-dev" className="max-w-full h-auto" alt="" />
+                    </div>
                 </nav>
                 <figure className="block mx-auto max-w-[375px] mb-2 relative figure-poke pt-5">
                     <img
@@ -99,9 +101,26 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                     />
                     <Pokeball />
                 </figure>
-                <p className="text-2xl font-bold text-zinc-400 mb-2">
+                <p className="text-2xl font-bold text-zinc-400 mb-3">
                     {pokemon.number}
                 </p>
+                {pokemon.type && (
+                    <div className="flex flex-row items-center w-full justify-center mb-3 gap-2">
+                        {pokemon.type.map(pokemonType => (
+                            <div
+                                className={`flex flex-row px-3 py-2 items-center rounded gap-2 text-zinc-100 type-pokemon capitalize ${pokemonType.color.type}`}
+                                key={pokemonType.name}
+                            >
+                                <>
+                                    {pokemonType.icon}
+                                </>
+                                <span className="drop-shadow">
+                                    {pokemonType.name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 <h1 className="text-4xl font-bold text-zinc-800 capitalize mb-2">
                     {name.replace("-", " ")}
                 </h1>
@@ -137,14 +156,6 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-5">
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
-                                Type
-                            </h3>
-                        </div>
-                        <Type pokemon={pokemon} />
-                    </div>
                     <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
                         <div className="w-full p-3 border-b">
                             <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>

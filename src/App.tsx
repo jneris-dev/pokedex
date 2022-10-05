@@ -45,7 +45,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		pokemonSearch.length >= 2 ? handleSearchPokemons() : handlePokemonsListDefault();
+		pokemonSearch.length > 0 ? handleSearchPokemons() : handlePokemonsListDefault();
 	}, [pokemonSearch]);
 
 	const handleMorePokemons = useCallback(
@@ -73,8 +73,8 @@ function App() {
 	return (
 		<main className="w-full relative flex flex-row items-stretch">
 			<aside className={`
-				w-full sm:max-w-[350px] max-w-[300px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-white shadow-lg divide-y-2 
-				${openMenu ? "ml-0" : "-ml-[350px]"}
+				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-white shadow-lg divide-y-2 
+				${openMenu ? "ml-0" : "lg:-ml-[400px] -ml-[350px]"}
 			`}>
 				<Search
 					value={pokemonSearch}
@@ -89,7 +89,7 @@ function App() {
 						stateMenu={openMenu}
 					/>
 				))}
-				{pokemonSearch.length < 0 && (
+				{pokemonSearch.length < 2 && (
 					<div className="w-full py-5 px-4">
 						<button
 							type="button"
@@ -109,7 +109,7 @@ function App() {
 
 			<section className={`
 				flex flex-col items-center transition-all duration-500 ml-auto
-				${openMenu ? "lg:w-[calc(100%-350px)] lg:overflow-auto overflow-hidden" : "w-full overflow-auto"}
+				${openMenu ? "lg:w-[calc(100%-400px)] lg:overflow-auto overflow-hidden" : "w-full overflow-auto"}
 			`}>
 				<Pokemon
 					name={pokemonDetail}

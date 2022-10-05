@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useState } from "react";
-import { MagnifyingGlass, X } from "phosphor-react";
+import { FunnelSimple, MagnifyingGlass, X } from "phosphor-react";
 
 interface SearchProps {
     value: string;
@@ -21,7 +21,10 @@ export function Search({ value, onChange }: SearchProps) {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        if (!search) return;
+        if (search.length < 1) {
+            setSearch('')
+            onChange('')
+        };
 
         onChange(search);
     };
@@ -33,6 +36,9 @@ export function Search({ value, onChange }: SearchProps) {
 
     return (
         <form className="w-full px-3 sticky top-0 bg-zinc-200 z-10 py-5 flex flex-row gap-3" onSubmit={handleSubmit}>
+            <button className="w-auto h-11 flex items-center justify-center cursor-not-allowed">
+                <FunnelSimple size={26} weight="bold" className="text-zinc-600" />
+            </button>
             <label className="flex-1 h-auto relative">
                 <input
                     type="text"
