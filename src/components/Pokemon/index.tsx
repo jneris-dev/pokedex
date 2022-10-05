@@ -89,7 +89,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                         className="cursor-pointer"
                         onClick={() => switchMenu(!stateMenu)}
                     />
-                    <div className="sm:w-12 w-9 sm:h-w-12 h-9 rounded-full overflow-hidden ring-2 ring-offset-2 ring-zinc-300 transition-all grayscale cursor-not-allowed hover:ring-zinc-400">
+                    <div className="sm:w-12 w-9 sm:h-12 h-9 rounded-full overflow-hidden ring-2 ring-offset-2 ring-zinc-300 transition-all grayscale cursor-not-allowed hover:ring-zinc-400">
                         <img src="https://avatars.githubusercontent.com/jneris-dev" className="max-w-full h-auto" alt="" />
                     </div>
                 </nav>
