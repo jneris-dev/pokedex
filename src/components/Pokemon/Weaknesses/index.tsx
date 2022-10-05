@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { PokemonTypesProps } from "../../../interfaces/interfaces";
-import { types_data } from "../../../util/typesEffectiveness";
+import { typesData } from "../../../util/typesEffectiveness";
 import { TypeIcon } from "./TypeIcon";
 import iconTypePokemon from '../../../util/Types';
 
@@ -20,11 +20,11 @@ export function Weaknesses({ pokemon }: Props) {
     const [effectiveness, setEffectiveness] = useState<EffectivenessProps[]>([])
 
     useEffect(() => {
-        if (pokemon.type && pokemon.type.length) {
+        if (pokemon.type) {
             let weaknesses = {} as any;
 
             pokemon.type.forEach(item => {
-                let defense = types_data[item.name].defense;
+                let defense = typesData[item.name].defense;
 
                 Object.entries(defense).forEach(([key, value]) => {
                     switch (key) {
@@ -40,7 +40,7 @@ export function Weaknesses({ pokemon }: Props) {
                     }
                 });
 
-                const weaknessDisplay = [];
+                const weaknessDisplay = [] as any;
                 Object.entries(weaknesses).forEach(([key, value]) => {
                     weaknessDisplay.push({ name: key, effect: value });
                 });

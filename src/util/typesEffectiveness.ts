@@ -1,4 +1,4 @@
-export const types_data = {
+export const typesData = {
     "normal": {
         "attack": {
             "double": [],
@@ -216,3 +216,5 @@ export const types_data = {
         }
     },
 };
+
+export type typeDataKeys = "normal" | "fire" | "water" | "electric" | "grass" | "ice" | "fighting" | "poison" | "ground" | "flying" | "psychic" | "bug" | "rock" | "ghost" | "dragon" | "dark" | "steel" | "fairy"
