@@ -35,16 +35,16 @@ export function Search({ value, onChange }: SearchProps) {
     }
 
     return (
-        <form className="w-full px-3 sticky top-0 bg-zinc-200 z-10 py-5 flex flex-row gap-3" onSubmit={handleSubmit}>
+        <form className="w-full px-3 sticky top-0 bg-zinc-200 dark:bg-zinc-700 z-10 py-5 flex flex-row gap-3" onSubmit={handleSubmit}>
             <button className="w-auto h-11 flex items-center justify-center cursor-not-allowed">
-                <FunnelSimple size={26} weight="bold" className="text-zinc-600" />
+                <FunnelSimple size={26} weight="bold" className="text-zinc-600 dark:text-zinc-300" />
             </button>
             <label className="flex-1 h-auto relative">
                 <input
                     type="text"
                     autoComplete="false"
                     value={search}
-                    className="w-full bg-zinc-100 h-11 rounded text-zinc-700 pl-3 pr-9 focus:outline-zinc-400"
+                    className="w-full bg-zinc-100 dark:bg-zinc-600 h-11 rounded text-zinc-700 dark:text-zinc-300 pl-3 pr-9 focus:outline-zinc-400 dark:focus:outline-zinc-600"
                     placeholder={isFocused ? '' : 'Search Pokemon'}
                     onChange={(e) => setSearch(e.target.value)}
                     onFocus={handleInputFocus}
@@ -53,12 +53,12 @@ export function Search({ value, onChange }: SearchProps) {
                 <X
                     size={16}
                     weight="bold"
-                    className={`absolute right-3 top-[calc(50%-8px)] z-10 cursor-pointer transition-all text-zinc-700 ${search.length <= 0 && 'invisible opacity-0'}`}
+                    className={`absolute right-3 top-[calc(50%-8px)] z-10 cursor-pointer transition-all text-zinc-700 dark:text-zinc-300 ${search.length <= 0 && 'invisible opacity-0'}`}
                     onClick={handleReset}
                 />
             </label>
             <button
-                className="w-11 h-11 flex items-center justify-center bg-red-600 text-zinc-100 rounded hover:bg-red-700 transition-colors"
+                className="w-11 h-11 flex items-center justify-center bg-indigo-600 text-zinc-100 rounded hover:bg-indigo-700 transition-colors"
                 type="submit"
             >
                 <MagnifyingGlass size={20} weight="bold" />

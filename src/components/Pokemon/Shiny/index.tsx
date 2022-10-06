@@ -22,7 +22,7 @@ export function Shiny({ name, pokemon }: Props) {
                         <img
                             src="https://pokemon.gameinfo.io/images/male_shiny_l.png"
                             alt="male_shiny_icon"
-                            className="absolute left-0 top-0 z-10 w-8"
+                            className="absolute left-[calc(50%-16px)] -top-3 z-20 w-8"
                         />
                         <Pokeball />
                     </figure>
@@ -36,7 +36,7 @@ export function Shiny({ name, pokemon }: Props) {
                             <img
                                 src="https://pokemon.gameinfo.io/images/female_shiny_l.png"
                                 alt="male_shiny_icon"
-                                className="absolute left-0 top-0 z-10 w-8"
+                                className="absolute left-[calc(50%-16px)] -top-3 z-20 w-8"
                             />
                             <Pokeball />
                         </figure>

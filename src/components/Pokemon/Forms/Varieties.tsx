@@ -68,7 +68,7 @@ export function Varieties({ pokemon, showDetail }: Props) {
                             {pokemonVarieties.number}
                         </p>
                         <h4 className="font-bold capitalize">
-                            {pokemon.name}
+                            {pokemon.name.replace("-", " ")}
                         </h4>
                     </div>
                     <div className="flex flex-row items-center justify-center mt-1 gap-2">

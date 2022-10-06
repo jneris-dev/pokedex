@@ -49,7 +49,7 @@ export function Forms({ pokemon, name, showDetail }: Props) {
                 :
                 <div className="p-3">
                     <p className="capitalize font-medium">
-                        <strong>{name}</strong> currently has no different forms.
+                        <strong>{name.replace("-", " ")}</strong> currently has no different forms.
                     </p>
                 </div>
             }

@@ -51,16 +51,35 @@ export function Weaknesses({ pokemon }: Props) {
     }, [pokemon.type]);
 
     return (
-        <div className="flex flex-row flex-wrap items-center mt-1 gap-2 p-3">
-            {effectiveness &&
-                effectiveness.map((weaknesses, index) => (
-                    <React.Fragment key={index}>
-                        {weaknesses.effect > 1 &&
-                            <TypeIcon type={weaknesses.name} />
-                        }
-                    </React.Fragment>
-                ))
-            }
+        <div>
+            <div>
+                <strong className="mt-4 pl-3 block">Weaknesses:</strong>
+                <div className="flex flex-row flex-wrap items-center mt-1 gap-2 p-3">
+                    {effectiveness &&
+                        effectiveness.map((weaknesses, index) => (
+                            <React.Fragment key={index}>
+                                {weaknesses.effect >= 2 &&
+                                    <TypeIcon type={weaknesses.name} effect={weaknesses.effect} />
+                                }
+                            </React.Fragment>
+                        ))
+                    }
+                </div>
+            </div>
+            <div>
+                <strong className="mt-4 pl-3 block">Resistances:</strong>
+                <div className="flex flex-row flex-wrap items-center mt-1 gap-2 p-3">
+                    {effectiveness &&
+                        effectiveness.map((weaknesses, index) => (
+                            <React.Fragment key={index}>
+                                {weaknesses.effect < 1 &&
+                                    <TypeIcon type={weaknesses.name} effect={weaknesses.effect} />
+                                }
+                            </React.Fragment>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     );
 }

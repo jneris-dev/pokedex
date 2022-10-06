@@ -5,16 +5,13 @@ import api from "./services/api";
 import { Card } from "./components/Card";
 import { Search } from "./components/Search";
 import { Pokemon } from "./components/Pokemon";
-
-interface PokemonProps {
-	id: string;
-	name: string;
-}
+import { PokemonProps } from "./interfaces/interfaces";
 
 function App() {
 	const NUMBER_POKEMONS = 25;
 	const NUMBER_MAX_POKEMONS_API = 929;
 
+	const [pokemon, setPokemon] = useState({} as PokemonProps);
 	const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
 	const [pokemonSearch, setPokemonSearch] = useState('');
 	const [pokemonDetail, setPokemonDetail] = useState(
@@ -24,15 +21,21 @@ function App() {
 	const [openMenu, setOpenMenu] = useState(
 		window.innerWidth > 1024 ? true : false
 	);
+	const [options, setOptions] = useState(false);
 
 	const handleSearchPokemons = useCallback(async () => {
-		const response = await api.get(`/pokemon?limit=${NUMBER_MAX_POKEMONS_API}`);
+		if (/\d/.test(pokemonSearch)) {
+			const response = await api.get(`/pokemon/${pokemonSearch}`);
+			setPokemon(response.data)
+		} else {
+			const response = await api.get(`/pokemon?limit=${NUMBER_MAX_POKEMONS_API}`);
 
-		setPokemonSearch(pokemonSearch.toLocaleLowerCase());
-		const pokemonsSearch = response.data.results.filter(
-			({ name }: PokemonProps) => name.includes(pokemonSearch),
-		);
-		setPokemons(pokemonsSearch)
+			setPokemonSearch(pokemonSearch.toLocaleLowerCase());
+			const pokemonsSearch = response.data.results.filter(
+				({ name }: PokemonProps) => name.includes(pokemonSearch),
+			);
+			setPokemons(pokemonsSearch)
+		}
 	}, [pokemonSearch]);
 
 	const handlePokemonsListDefault = useCallback(async () => {
@@ -73,27 +76,41 @@ function App() {
 	return (
 		<main className="w-full relative flex flex-row items-stretch">
 			<aside className={`
-				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-white shadow-lg divide-y-2 
+				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-zinc-50 dark:bg-zinc-800 shadow-lg divide-y-2 dark:divide-zinc-700 
 				${openMenu ? "ml-0" : "lg:-ml-[400px] -ml-[350px]"}
 			`}>
 				<Search
 					value={pokemonSearch}
 					onChange={setPokemonSearch}
 				/>
-				{pokemons.map(pokemon => (
-					<Card
-						key={pokemon.name}
-						name={pokemon.name}
-						showDetail={handlePokemonDetail}
-						switchMenu={setOpenMenu}
-						stateMenu={openMenu}
-					/>
-				))}
-				{pokemonSearch.length < 2 && (
+				{/\d/.test(pokemonSearch) ? (
+					<>
+						<Card
+							key={pokemon.name}
+							name={pokemon.name}
+							showDetail={handlePokemonDetail}
+							switchMenu={setOpenMenu}
+							stateMenu={openMenu}
+						/>
+					</>
+				) : (
+					<>
+						{pokemons.map(pokemon => (
+							<Card
+								key={pokemon.name}
+								name={pokemon.name}
+								showDetail={handlePokemonDetail}
+								switchMenu={setOpenMenu}
+								stateMenu={openMenu}
+							/>
+						))}
+					</>
+				)}
+				{pokemonSearch.length < 1 && (
 					<div className="w-full py-5 px-4">
 						<button
 							type="button"
-							className="w-full bg-red-600 text-zinc-100 rounded max-w-[250px] h-9 font-sm font-medium capitalize block mx-auto hover:bg-red-700 hover:ring-2 hover:ring-offset-2 hover:ring-red-700"
+							className="w-full bg-indigo-600 text-zinc-100 rounded max-w-[250px] h-9 font-sm font-medium capitalize block mx-auto hover:bg-indigo-700 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-700 hover:ring-offset-zinc-50 dark:hover:ring-offset-zinc-800"
 							onClick={() => handleMorePokemons(pokemonsOffsetApi)}
 						>
 							Carregar mais
@@ -116,6 +133,8 @@ function App() {
 					showDetail={handlePokemonDetail}
 					switchMenu={setOpenMenu}
 					stateMenu={openMenu}
+					options={options}
+					setOptions={setOptions}
 				/>
 			</section>
 		</main>

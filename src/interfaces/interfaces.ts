@@ -30,8 +30,8 @@ export interface PokemonProps {
     shiny: string;
     shiny_f: string;
     specie: string;
-    height: string;
-    weight: string;
+    height: number;
+    weight: number;
     stats: {
         hp: number;
         attack: number;

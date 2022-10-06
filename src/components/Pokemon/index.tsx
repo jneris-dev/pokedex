@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Sidebar } from "phosphor-react";
 
 import api from "../../services/api";
 import { PokemonTypeMap } from '../../util/pokemonTypeMap';
@@ -14,15 +13,18 @@ import { Forms } from "./Forms";
 import { Evolves } from "./Evolves";
 import { Shiny } from "./Shiny";
 import { Weaknesses } from "./Weaknesses";
+import { Nav } from "../Nav";
 
 interface PokemonDetailProps {
     name: string;
     showDetail: (value: string) => void;
     switchMenu: (value: boolean) => void;
     stateMenu: boolean;
+    options: boolean;
+    setOptions: (value: boolean) => void;
 }
 
-export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDetailProps) {
+export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setOptions }: PokemonDetailProps) {
 
     const [pokemon, setPokemon] = useState({} as PokemonProps);
     const [specieName, setSpecieName] = useState('')
@@ -46,9 +48,9 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                 image: sprites.other['official-artwork'].front_default || sprites.front_default,
                 shiny: sprites.other.home.front_shiny,
                 shiny_f: sprites.other.home.front_shiny_female,
-                weight: `${weight / 10} kg`,
+                weight: weight / 10,
                 specie: species.name,
-                height: `${height / 10} m`,
+                height: height / 10,
                 stats: {
                     hp: stats[0].base_stat,
                     attack: stats[1].base_stat,
@@ -83,17 +85,15 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
         <div className="w-full h-auto relative py-5 px-6">
             <header className="w-full text-center mb-10 relative">
                 <nav className={`w-full absolute top-0 left-0 flex flex-row justify-between items-center z-10 ${pokemon.type && pokemon.type[0].color.text}`}>
-                    <Sidebar
-                        size={30}
-                        weight="bold"
-                        className="cursor-pointer"
-                        onClick={() => switchMenu(!stateMenu)}
+                    <Nav
+                        pokemon={pokemon}
+                        switchMenu={switchMenu}
+                        stateMenu={stateMenu}
+                        options={options}
+                        setOptions={setOptions}
                     />
-                    <div className="sm:w-12 w-9 sm:h-12 h-9 rounded-full overflow-hidden ring-2 ring-offset-2 ring-zinc-300 transition-all grayscale cursor-not-allowed hover:ring-zinc-400">
-                        <img src="https://avatars.githubusercontent.com/jneris-dev" className="max-w-full h-auto" alt="" />
-                    </div>
                 </nav>
-                <figure className="block mx-auto max-w-[375px] mb-2 relative figure-poke pt-5">
+                <figure className="block mx-auto max-w-[375px] mb-2 relative figure-poke-full pt-5">
                     <img
                         src={pokemon.image}
                         alt={`Imagem do pokémon ${name}`}
@@ -101,7 +101,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                     />
                     <Pokeball />
                 </figure>
-                <p className="text-2xl font-bold text-zinc-400 mb-3">
+                <p className="text-2xl font-bold text-zinc-400 dark:text-zinc-600 mb-3">
                     {pokemon.number}
                 </p>
                 {pokemon.type && (
@@ -121,34 +121,34 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                         ))}
                     </div>
                 )}
-                <h1 className="text-4xl font-bold text-zinc-800 capitalize mb-2">
+                <h1 className="text-4xl font-bold text-zinc-800 dark:text-zinc-100 capitalize mb-2">
                     {name.replace("-", " ")}
                 </h1>
-                <h2 className="text-2xl font-bold text-zinc-400">
+                <h2 className="text-2xl font-bold text-zinc-400 dark:text-zinc-600">
                     {specieName}
                 </h2>
             </header>
             <div className="w-full h-auto relative gap-5 flex md:flex-row flex-col max-w-[1024px] mx-auto">
                 <div className="w-full flex flex-col gap-5">
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Pokédex Data
                             </h3>
                         </div>
                         <About pokemon={pokemon} />
                     </div>
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Training
                             </h3>
                         </div>
                         <Training pokemon={pokemon} />
                     </div>
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Base Stats
                             </h3>
                         </div>
@@ -156,33 +156,33 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu }: PokemonDeta
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-5">
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
-                                Weaknesses
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
+                                Effectiveness Type
                             </h3>
                         </div>
                         <Weaknesses pokemon={pokemon} />
                     </div>
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Shiny
                             </h3>
                         </div>
                         <Shiny name={name} pokemon={pokemon} />
                     </div>
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Evolution
                             </h3>
                         </div>
                         <Evolves name={name} showDetail={showDetail} pokemon={pokemon} />
                     </div>
-                    <div className={`bg-white rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
-                        <div className="w-full p-3 border-b">
-                            <h3 className={`text-lg font-bold ${pokemon.type && pokemon.type[0].color.text}`}>
+                    <div className={`bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md p-3 border-t-4 ${pokemon.type && pokemon.type[0].color.border}`}>
+                        <div className="w-full p-3 border-b border-b-zinc-200 dark:border-b-zinc-700">
+                            <h3 className="text-lg font-bold">
                                 Varieties
                             </h3>
                         </div>

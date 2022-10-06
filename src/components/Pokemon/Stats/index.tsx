@@ -36,7 +36,7 @@ export function Stats({ pokemon }: Props) {
                                 </span>
                             </div>
 
-                            <div className="flex-1 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 overflow-hidden">
+                            <div className="flex-1 bg-gray-200 rounded-full h-2.5 dark:bg-zinc-700 overflow-hidden">
                                 <div
                                     className={`
                                             h-2.5 rounded-full
