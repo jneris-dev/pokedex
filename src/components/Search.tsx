@@ -46,7 +46,7 @@ export function Search({ value, onChange, filtered, filter }: SearchProps) {
 
     return (
         <>
-            <div className="w-full px-3 sticky top-0 bg-zinc-200 dark:bg-zinc-700 z-10 py-5 flex flex-row gap-3">
+            <div className="w-full px-3 bg-zinc-200 dark:bg-zinc-700 py-5 flex flex-row gap-3">
                 <button className="w-auto h-11 flex items-center justify-center cursor-pointer" onClick={openFilters}>
                     <FunnelSimple size={26} weight="bold" className="text-zinc-600 dark:text-zinc-300" />
                 </button>

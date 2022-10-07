@@ -1,19 +1,24 @@
+import { useState } from "react";
 import Pokeball from "../../Pokeball";
 
 interface Props {
     name: string;
     pokemon: {
+        image: string;
         shiny: string;
         shiny_f: string;
+        not_shiny: string;
     }
 }
 
 export function Shiny({ name, pokemon }: Props) {
+    const [showShiny, setShowShiny] = useState(false)
+
     return (
         <>
             {pokemon.shiny ?
-                <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
-                    <figure className="block mx-auto relative figure-varieties-poke">
+                <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-10 gap-5 p-5">
+                    <figure className="block mx-auto relative figure-varieties-poke" onClick={() => setShowShiny(!showShiny)}>
                         <img
                             src={pokemon.shiny}
                             alt={`Imagem do pokémon ${name}`}
@@ -27,7 +32,7 @@ export function Shiny({ name, pokemon }: Props) {
                         <Pokeball />
                     </figure>
                     {pokemon.shiny_f &&
-                        <figure className="block mx-auto relative figure-varieties-poke">
+                        <figure className="block mx-auto relative figure-varieties-poke" onClick={() => setShowShiny(!showShiny)}>
                             <img
                                 src={pokemon.shiny_f}
                                 alt={`Imagem do pokémon ${name}`}

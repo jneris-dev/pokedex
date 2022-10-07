@@ -38,7 +38,7 @@ export function Card({ name, showDetail, switchMenu, stateMenu }: CardProps) {
                 setPokemon({
                     id,
                     image: sprites.other['official-artwork'].front_default,
-                    gif: sprites.versions['generation-v']["black-white"].animated.front_default,
+                    gif: sprites.versions['generation-v']["black-white"].animated.front_default || sprites.front_default,
                     type: types.map((pokemonType: any) => {
                         const typeName = pokemonType.type.name as keyof typeof iconTypePokemon;
                         return {

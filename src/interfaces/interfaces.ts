@@ -27,6 +27,7 @@ export interface PokemonProps {
     id: number;
     number: string;
     image: string;
+    not_shiny: string;
     shiny: string;
     shiny_f: string;
     specie: string;

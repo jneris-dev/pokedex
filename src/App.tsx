@@ -8,6 +8,7 @@ import { Pokemon } from "./components/Pokemon";
 import { PokemonByTypeProps, PokemonProps } from "./interfaces/interfaces";
 import { TypeIcon } from "./components/Pokemon/Weaknesses/TypeIcon";
 import { typeDataKeys } from "./util/typesEffectiveness";
+import { X } from "phosphor-react";
 
 function App() {
 	const NUMBER_POKEMONS = 25;
@@ -100,18 +101,29 @@ function App() {
 				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar pb-5 bg-zinc-50 dark:bg-zinc-800 shadow-lg divide-y-2 dark:divide-zinc-700 
 				${openMenu ? "ml-0" : "lg:-ml-[400px] -ml-[350px]"}
 			`}>
-				<Search
-					value={pokemonSearch}
-					onChange={setPokemonSearch}
-					filtered={setFilterType}
-					filter={filterType}
-				/>
-				{filterType &&
-					<div className="px-4 pb-4 pt-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex flex-row gap-3 items-center">
-						<strong>Filtered by:</strong>
-						<TypeIcon rounded="full" padding="2" addClass="type-pokemon" type={filterType} />
-					</div>
-				}
+				<div className="sticky top-0 z-10">
+					<Search
+						value={pokemonSearch}
+						onChange={setPokemonSearch}
+						filtered={setFilterType}
+						filter={filterType}
+					/>
+					{filterType &&
+						<div className="px-4 pb-4 pt-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex flex-row items-center justify-between">
+							<div className="flex flex-row gap-3 items-center">
+								<strong>Filtered by:</strong>
+								<TypeIcon rounded="full" padding="2" addClass="type-pokemon" type={filterType} />
+							</div>
+							<button type="button" onClick={() => setFilterType('' as typeDataKeys)}>
+								<X
+									size={20}
+									weight="bold"
+									className="transition-colors text-zinc-400 hover:text-zinc-200"
+								/>
+							</button>
+						</div>
+					}
+				</div>
 				{/\d/.test(pokemonSearch) ? (
 					<>
 						<Card
