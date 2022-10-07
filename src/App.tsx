@@ -5,7 +5,9 @@ import api from "./services/api";
 import { Card } from "./components/Card";
 import { Search } from "./components/Search";
 import { Pokemon } from "./components/Pokemon";
-import { PokemonProps } from "./interfaces/interfaces";
+import { PokemonByTypeProps, PokemonProps } from "./interfaces/interfaces";
+import { TypeIcon } from "./components/Pokemon/Weaknesses/TypeIcon";
+import { typeDataKeys } from "./util/typesEffectiveness";
 
 function App() {
 	const NUMBER_POKEMONS = 25;
@@ -22,6 +24,8 @@ function App() {
 		window.innerWidth > 1024 ? true : false
 	);
 	const [options, setOptions] = useState(false);
+	const [filterType, setFilterType] = useState('' as typeDataKeys)
+	const [pokemonByType, setPokemonByType] = useState<PokemonByTypeProps[]>([])
 
 	const handleSearchPokemons = useCallback(async () => {
 		if (/\d/.test(pokemonSearch)) {
@@ -47,9 +51,26 @@ function App() {
 		setPokemons(response.data.results);
 	}, []);
 
+	const handlePokemonsListByType = useCallback(async () => {
+		const response = await api.get(`/type/${filterType}`, {
+			params: {
+				limit: NUMBER_POKEMONS,
+			},
+		});
+		setPokemonByType(response.data.pokemon)
+	}, [filterType]);
+
 	useEffect(() => {
-		pokemonSearch.length > 0 ? handleSearchPokemons() : handlePokemonsListDefault();
+		pokemonSearch !== '' ? handleSearchPokemons() : handlePokemonsListDefault();
 	}, [pokemonSearch]);
+
+	useEffect(() => {
+		if (pokemonSearch === '') {
+			filterType ? handlePokemonsListByType() : handlePokemonsListDefault();
+		} else {
+			pokemonSearch !== '' ? handleSearchPokemons() : handlePokemonsListDefault();
+		}
+	}, [filterType, pokemonSearch]);
 
 	const handleMorePokemons = useCallback(
 		async (offset: any) => {
@@ -82,7 +103,15 @@ function App() {
 				<Search
 					value={pokemonSearch}
 					onChange={setPokemonSearch}
+					filtered={setFilterType}
+					filter={filterType}
 				/>
+				{filterType &&
+					<div className="px-4 pb-4 pt-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex flex-row gap-3 items-center">
+						<strong>Filtered by:</strong>
+						<TypeIcon rounded="full" padding="2" addClass="type-pokemon" type={filterType} />
+					</div>
+				}
 				{/\d/.test(pokemonSearch) ? (
 					<>
 						<Card
@@ -92,6 +121,18 @@ function App() {
 							switchMenu={setOpenMenu}
 							stateMenu={openMenu}
 						/>
+					</>
+				) : filterType ? (
+					<>
+						{pokemonByType.map(pokemon => (
+							<Card
+								key={pokemon.pokemon.name}
+								name={pokemon.pokemon.name}
+								showDetail={handlePokemonDetail}
+								switchMenu={setOpenMenu}
+								stateMenu={openMenu}
+							/>
+						))}
 					</>
 				) : (
 					<>
@@ -106,7 +147,7 @@ function App() {
 						))}
 					</>
 				)}
-				{pokemonSearch.length < 1 && (
+				{!pokemonSearch && !filterType && (
 					<div className="w-full py-5 px-4">
 						<button
 							type="button"

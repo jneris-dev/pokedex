@@ -55,11 +55,12 @@ export function Varieties({ pokemon, showDetail }: Props) {
             {pokemonVarieties.image &&
                 <div>
                     <figure
-                        className="block mx-auto relative figure-varieties-poke"
+                        className="block mx-auto relative figure-varieties-poke cursor-pointer"
                     >
                         <img
                             src={pokemonVarieties.image}
                             className="w-full z-10 relative"
+                            onClick={() => showDetail(pokemon.name)}
                         />
                         <Pokeball />
                     </figure>

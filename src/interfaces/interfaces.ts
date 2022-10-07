@@ -48,3 +48,11 @@ export interface TypePokemonResponse {
         name: keyof typeof iconTypePokemon;
     };
 }
+
+export interface PokemonByTypeProps {
+    pokemon: {
+        name: string;
+        url: string;
+    },
+    slot: string;
+}

@@ -6,6 +6,7 @@ import { Varieties } from "./Varieties";
 interface Props {
     pokemon: {
         id: number;
+        specie: string;
     }
     name: string;
     showDetail: (value: string) => void;
@@ -22,8 +23,8 @@ export function Forms({ pokemon, name, showDetail }: Props) {
     const [pokemonForms, setPokemonForms] = useState<SpecieProps[]>([]);
 
     useEffect(() => {
-        if (pokemon.id) {
-            api.get(`/pokemon-species/${pokemon.id}`).then(response => {
+        if (pokemon.specie) {
+            api.get(`/pokemon-species/${pokemon.specie}`).then(response => {
                 const varieties = response.data.varieties;
                 setPokemonForms(varieties);
             }).catch(error => {

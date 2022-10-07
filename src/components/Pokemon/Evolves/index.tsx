@@ -10,6 +10,7 @@ import Pokeball from "../../Pokeball";
 interface Props {
     pokemon: {
         id: number;
+        specie: string;
     }
     name: string;
     showDetail: (value: string) => void;
@@ -60,16 +61,17 @@ export function Evolves({ pokemon, name, showDetail }: Props) {
     );
 
     useEffect(() => {
-        api.get(`/pokemon-species/${name}`).then(responseSpecies => {
-            const url = responseSpecies.data.evolution_chain.url.split('v2')[1];
-            api.get(url).then(responseEvolution => {
-                const species = handleNameSpecies(responseEvolution.data.chain);
-                setPokemonsFamily(species)
+        if (pokemon.specie)
+            api.get(`/pokemon-species/${pokemon.specie}`).then(responseSpecies => {
+                const url = responseSpecies.data.evolution_chain.url.split('v2')[1];
+                api.get(url).then(responseEvolution => {
+                    const species = handleNameSpecies(responseEvolution.data.chain);
+                    setPokemonsFamily(species)
+                });
+            }).catch(error => {
+                if (error)
+                    setPokemonsFamily([])
             });
-        }).catch(error => {
-            if (error)
-                setPokemonsFamily([])
-        });
     }, [pokemon, handleNameSpecies]);
 
     useEffect(() => {

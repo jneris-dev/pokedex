@@ -70,13 +70,12 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
 
     useEffect(() => {
         if (pokemon.id) {
-            api.get(`/pokemon-species/${pokemon.id}`).then(response => {
+            api.get(`/pokemon-species/${pokemon.specie}`).then(response => {
                 const { names } = response.data;
                 setSpecieName(names[0].name)
             }).catch(error => {
-                if (error.response && error.response.status === 404)
-                    console.clear();
-                setSpecieName('')
+                if (error)
+                    setSpecieName('')
             });
         }
     }, [pokemon.id]);

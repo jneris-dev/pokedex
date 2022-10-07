@@ -59,7 +59,7 @@ export function Weaknesses({ pokemon }: Props) {
                         effectiveness.map((weaknesses, index) => (
                             <React.Fragment key={index}>
                                 {weaknesses.effect >= 2 &&
-                                    <TypeIcon type={weaknesses.name} effect={weaknesses.effect} />
+                                    <TypeIcon rounded="md" padding="4" addClass="weaknesses-type-pokemon" type={weaknesses.name} effect={weaknesses.effect} />
                                 }
                             </React.Fragment>
                         ))
@@ -73,7 +73,7 @@ export function Weaknesses({ pokemon }: Props) {
                         effectiveness.map((weaknesses, index) => (
                             <React.Fragment key={index}>
                                 {weaknesses.effect < 1 &&
-                                    <TypeIcon type={weaknesses.name} effect={weaknesses.effect} />
+                                    <TypeIcon rounded="md" padding="4" addClass="weaknesses-type-pokemon" type={weaknesses.name} effect={weaknesses.effect} />
                                 }
                             </React.Fragment>
                         ))

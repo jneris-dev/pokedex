@@ -19,7 +19,7 @@ body {
 }
 
 .figure-poke-card > svg {
-    @apply fill-zinc-200 dark:fill-zinc-600;
+    @apply fill-zinc-300 dark:fill-zinc-600;
 }
 
 .type-single-pokemon > svg {

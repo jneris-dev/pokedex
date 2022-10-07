@@ -58,13 +58,19 @@ export function Card({ name, showDetail, switchMenu, stateMenu }: CardProps) {
                     className={`poke-card w-full mx-auto flex items-center p-4 relative gap-4 flex-row hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:cursor-pointer`}
                     onClick={() => moreAboutPokemon()}
                 >
-                    <figure className="min-w-[82px] figure-poke-card">
-                        <img
-                            src={pokemon.gif || pokemon.image}
-                            alt={`Imagem do pokémon ${name}`}
-                            className="max-h-[50px] mx-auto block"
-                        />
-                    </figure>
+                    {pokemon.gif || pokemon.image ?
+                        <figure className="min-w-[82px] figure-poke-card">
+                            <img
+                                src={pokemon.gif || pokemon.image}
+                                alt={`Imagem do pokémon ${name}`}
+                                className="max-h-[50px] mx-auto block"
+                            />
+                        </figure>
+                        :
+                        <div className="not-image-poke figure-poke-card min-w-[82px]">
+                            <Pokeball />
+                        </div>
+                    }
                     <div className="flex flex-col items-stretch justify-center relative">
                         <span className="text-md font-bold tracking-wide text-zinc-400 dark:text-zinc-600">
                             #{pokemon.id}

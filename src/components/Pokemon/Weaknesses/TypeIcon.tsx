@@ -3,13 +3,16 @@ import iconTypePokemon from '../../../util/Types';
 
 interface Props {
     type: keyof typeof iconTypePokemon;
-    effect: number;
+    effect?: number;
+    rounded: string;
+    padding: string;
+    addClass?: string;
 }
 
-export function TypeIcon({ type, effect }: Props) {
+export function TypeIcon({ type, effect, rounded, padding, addClass }: Props) {
     return (
         <div
-            className={`flex relative flex-row p-4 items-center rounded gap-2 text-zinc-100 weaknesses-type-pokemon capitalize ${PokemonTypeMap[type].type}`}
+            className={`flex relative flex-row p-${padding} items-center rounded-${rounded} gap-2 text-zinc-100 capitalize ${PokemonTypeMap[type].type} ${addClass}`}
         >
             <>
                 {iconTypePokemon[type]}
