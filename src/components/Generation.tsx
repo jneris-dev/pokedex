@@ -29,7 +29,7 @@ export function Generation({ poke_one, poke_two, poke_three, currentGeneration, 
     return (
         <button
             type="button"
-            className="bg-zinc-700 p-3 rounded text-center hover:ring-2 focus:outline-none focus:ring-2 ring-offset-2 ring-offset-zinc-800 ring-zinc-600 cursor-pointer flex-1"
+            className="bg-zinc-100 dark:bg-zinc-700 p-3 rounded text-center hover:ring-2 focus:outline-none focus:ring-2 ring-offset-2 ring-offset-zinc-50 dark:ring-offset-zinc-800 ring-zinc-100 dark:ring-zinc-600 cursor-pointer flex-1 border border-zinc-200 dark:border-zinc-700"
             onClick={handleSelectGeneration}
         >
             <div className="flex flex-row items-end justify-center">
