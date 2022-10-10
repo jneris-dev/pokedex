@@ -67,6 +67,9 @@ export function Evolves({ pokemon, name, showDetail }: Props) {
                 api.get(url).then(responseEvolution => {
                     const species = handleNameSpecies(responseEvolution.data.chain);
                     setPokemonsFamily(species)
+                }).catch(error => {
+                    if (error)
+                        setPokemonsFamily([])
                 });
             }).catch(error => {
                 if (error)
@@ -76,11 +79,14 @@ export function Evolves({ pokemon, name, showDetail }: Props) {
 
     useEffect(() => {
         if (pokemonsFamily.length > 1) {
-            const urlsAxios = pokemonsFamily.map(p => api.get(`/pokemon/${p.name}`));
+            const urlsAxios = pokemonsFamily.map(p => api.get(`/pokemon/${p.name}`).catch(error => {
+                if (error)
+                    setPokemonsFamily([])
+            }));
 
             Promise.all([...urlsAxios]).then(responses => {
                 const result = responses.map((response, index) => {
-                    const { id, sprites, types } = response.data;
+                    const { id, sprites, types } = response?.data;
                     return {
                         ...pokemonsFamily[index],
                         number: `#${'000'.substr(id.toString().length)}${id}`,

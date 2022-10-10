@@ -53,7 +53,7 @@ export function Weaknesses({ pokemon }: Props) {
     return (
         <div>
             <div>
-                <strong className="mt-4 pl-3 block">Weaknesses:</strong>
+                <strong className="mt-4 pl-3 block text-zinc-500">Weaknesses:</strong>
                 <div className="flex flex-row flex-wrap items-center mt-1 gap-2 p-3">
                     {effectiveness &&
                         effectiveness.map((weaknesses, index) => (
@@ -67,7 +67,7 @@ export function Weaknesses({ pokemon }: Props) {
                 </div>
             </div>
             <div>
-                <strong className="mt-4 pl-3 block">Resistances:</strong>
+                <strong className="mt-4 pl-3 block text-zinc-500">Resistances:</strong>
                 <div className="flex flex-row flex-wrap items-center mt-1 gap-2 p-3">
                     {effectiveness &&
                         effectiveness.map((weaknesses, index) => (

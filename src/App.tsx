@@ -5,7 +5,7 @@ import api from "./services/api";
 import { Card } from "./components/Card";
 import { Search } from "./components/Search";
 import { Pokemon } from "./components/Pokemon";
-import { PokemonByTypeProps, PokemonProps } from "./interfaces/interfaces";
+import { GenerationsProps, PokemonByTypeProps, PokemonProps } from "./interfaces/interfaces";
 import { TypeIcon } from "./components/Pokemon/Weaknesses/TypeIcon";
 import { typeDataKeys } from "./util/typesEffectiveness";
 import { X } from "phosphor-react";
@@ -27,6 +27,7 @@ function App() {
 	const [options, setOptions] = useState(false);
 	const [filterType, setFilterType] = useState('' as typeDataKeys)
 	const [pokemonByType, setPokemonByType] = useState<PokemonByTypeProps[]>([])
+	const [generation, setGeneration] = useState({} as GenerationsProps);
 
 	const handleSearchPokemons = useCallback(async () => {
 		if (/\d/.test(pokemonSearch)) {
@@ -61,17 +62,23 @@ function App() {
 		setPokemonByType(response.data.pokemon)
 	}, [filterType]);
 
-	useEffect(() => {
-		pokemonSearch !== '' ? handleSearchPokemons() : handlePokemonsListDefault();
-	}, [pokemonSearch]);
+	const handlePokemonsListByGeneration = useCallback(async () => {
+		const limit = generation.limit
+		const offset = generation.offset
+		const response = await api.get(`/pokemon?limit=${limit}&offset=${offset}`);
+
+		setPokemons(response.data.results);
+	}, [generation]);
 
 	useEffect(() => {
-		if (pokemonSearch === '') {
+		if (pokemonSearch === '' || Object.keys(generation).length !== 0 && generation.text !== '') {
 			filterType ? handlePokemonsListByType() : handlePokemonsListDefault();
-		} else {
+		} else if (!filterType || Object.keys(generation).length !== 0 && generation.text !== '') {
 			pokemonSearch !== '' ? handleSearchPokemons() : handlePokemonsListDefault();
+		} else {
+			generation ? handlePokemonsListByGeneration() : handlePokemonsListDefault();
 		}
-	}, [filterType, pokemonSearch]);
+	}, [filterType, pokemonSearch, generation]);
 
 	const handleMorePokemons = useCallback(
 		async (offset: any) => {
@@ -107,6 +114,8 @@ function App() {
 						onChange={setPokemonSearch}
 						filtered={setFilterType}
 						filter={filterType}
+						currentGeneration={generation}
+						setGeneration={setGeneration}
 					/>
 					{filterType &&
 						<div className="px-4 pb-4 pt-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex flex-row items-center justify-between">
@@ -114,7 +123,30 @@ function App() {
 								<strong>Filtered by:</strong>
 								<TypeIcon rounded="full" padding="2" addClass="type-pokemon" type={filterType} />
 							</div>
-							<button type="button" onClick={() => setFilterType('' as typeDataKeys)}>
+
+							<button
+								type="button"
+								onClick={() => setFilterType('' as typeDataKeys)}
+							>
+								<X
+									size={20}
+									weight="bold"
+									className="transition-colors text-zinc-400 hover:text-zinc-200"
+								/>
+							</button>
+						</div>
+					}
+					{Object.keys(generation).length !== 0 && generation.text !== '' &&
+						<div className="px-4 pb-4 pt-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex flex-row items-center justify-between">
+							<div className="flex flex-row gap-3 items-center">
+								<strong>Filtered by:</strong>
+								<span>Generation {generation.text}</span>
+							</div>
+
+							<button
+								type="button"
+								onClick={() => setGeneration({ text: "", offset: 0, limit: 0 })}
+							>
 								<X
 									size={20}
 									weight="bold"
@@ -159,7 +191,7 @@ function App() {
 						))}
 					</>
 				)}
-				{!pokemonSearch && !filterType && (
+				{!pokemonSearch && !filterType && generation.text === '' && (
 					<div className="w-full py-5 px-4">
 						<button
 							type="button"

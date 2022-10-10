@@ -24,11 +24,26 @@ export function Shiny({ name, pokemon }: Props) {
                             alt={`Imagem do pokémon ${name}`}
                             className="w-full z-10 relative"
                         />
-                        <img
-                            src="https://pokemon.gameinfo.io/images/male_shiny_l.png"
-                            alt="male_shiny_icon"
-                            className="absolute left-[calc(50%-16px)] -top-3 z-20 w-8"
-                        />
+                        {!pokemon.shiny_f ?
+                            <>
+                                <img
+                                    src="https://pokemon.gameinfo.io/images/male_shiny_l.png"
+                                    alt="male_shiny_icon"
+                                    className="absolute left-[calc(40%-16px)] -top-3 z-20 w-8"
+                                />
+                                <img
+                                    src="https://pokemon.gameinfo.io/images/female_shiny_l.png"
+                                    alt="male_shiny_icon"
+                                    className="absolute left-[calc(60%-16px)] -top-3 z-20 w-8"
+                                />
+                            </>
+                            :
+                            <img
+                                src="https://pokemon.gameinfo.io/images/male_shiny_l.png"
+                                alt="male_shiny_icon"
+                                className="absolute left-[calc(50%-16px)] -top-3 z-20 w-8"
+                            />
+                        }
                         <Pokeball />
                     </figure>
                     {pokemon.shiny_f &&

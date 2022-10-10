@@ -36,6 +36,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                 weight,
                 height,
                 stats,
+                base_experience,
                 sprites,
                 types,
                 species,
@@ -52,6 +53,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                 weight: weight / 10,
                 specie: species.name,
                 height: height / 10,
+                baseExperience: base_experience,
                 stats: {
                     hp: stats[0].base_stat,
                     attack: stats[1].base_stat,

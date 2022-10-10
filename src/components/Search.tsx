@@ -2,15 +2,18 @@ import { FormEvent, useCallback, useState } from "react";
 import { FunnelSimple, MagnifyingGlass, X } from "phosphor-react";
 import { Filters } from "./Filters";
 import { typeDataKeys } from "../util/typesEffectiveness";
+import { GenerationsProps } from "../interfaces/interfaces";
 
 interface SearchProps {
     value: string;
     onChange(value: string): void;
     filtered(value: any): void;
     filter: typeDataKeys;
+    currentGeneration: GenerationsProps;
+    setGeneration(generation: GenerationsProps): void;
 }
 
-export function Search({ value, onChange, filtered, filter }: SearchProps) {
+export function Search({ value, onChange, filtered, filter, currentGeneration, setGeneration }: SearchProps) {
     const [isFocused, setIsFocused] = useState(false);
     const [search, setSearch] = useState('');
     const [filters, setFilters] = useState(false)
@@ -42,6 +45,13 @@ export function Search({ value, onChange, filtered, filter }: SearchProps) {
 
     function openFilters() {
         setFilters(!filters)
+        filtered('')
+        handleReset()
+        setGeneration({
+            text: "",
+            offset: 0,
+            limit: 0
+        })
     }
 
     return (
@@ -77,7 +87,17 @@ export function Search({ value, onChange, filtered, filter }: SearchProps) {
                     </button>
                 </form>
             </div>
-            {filters && <Filters state={filters} show={setFilters} filtered={filtered} filter={filter} clearSearch={handleReset} />}
+            {filters &&
+                <Filters
+                    state={filters}
+                    show={setFilters}
+                    filtered={filtered}
+                    filter={filter}
+                    clearSearch={handleReset}
+                    currentGeneration={currentGeneration}
+                    setGeneration={setGeneration}
+                />
+            }
         </>
     );
 }

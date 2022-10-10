@@ -33,6 +33,7 @@ export interface PokemonProps {
     specie: string;
     height: number;
     weight: number;
+    baseExperience: number;
     stats: {
         hp: number;
         attack: number;
@@ -56,4 +57,10 @@ export interface PokemonByTypeProps {
         url: string;
     },
     slot: string;
+}
+
+export interface GenerationsProps {
+    text: string,
+    offset: number,
+    limit: number,
 }

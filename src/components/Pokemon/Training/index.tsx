@@ -5,13 +5,14 @@ import api from "../../../services/api";
 interface Props {
     pokemon: {
         specie: string;
+        baseExperience: number;
     };
 }
 
 interface SpecieProps {
-    capture_rate: string;
-    base_happiness: string;
-    growth_rate: string;
+    captureRate: number;
+    baseHappiness: string;
+    growthRate: string;
 }
 
 export function Training({ pokemon }: Props) {
@@ -25,9 +26,9 @@ export function Training({ pokemon }: Props) {
                 const { capture_rate, base_happiness, growth_rate } = response.data;
 
                 setPokemonSpecie({
-                    capture_rate,
-                    base_happiness,
-                    growth_rate: growth_rate.name.replace('-', ' '),
+                    captureRate: capture_rate,
+                    baseHappiness: base_happiness,
+                    growthRate: growth_rate.name.replace('-', ' '),
                 });
             });
         }
@@ -37,10 +38,10 @@ export function Training({ pokemon }: Props) {
         <ul className="w-full p-3 flex flex-col gap-3">
             <li className="w-full flex flex-row gap-3">
                 <strong className="text-zinc-500">
-                    Catch Rate:
+                    Base Exp:
                 </strong>
-                <span className="capitalize font-medium">
-                    {pokemonSpecie.capture_rate}
+                <span className="font-medium">
+                    {pokemon.baseExperience}
                 </span>
             </li>
             <li className="w-full flex flex-row gap-3">
@@ -48,15 +49,23 @@ export function Training({ pokemon }: Props) {
                     Base Friendship:
                 </strong>
                 <span className="font-medium">
-                    {pokemonSpecie.base_happiness}
+                    {pokemonSpecie.baseHappiness}
+                </span>
+            </li>
+            <li className="w-full flex flex-row gap-3">
+                <strong className="text-zinc-500">
+                    Catch Rate:
+                </strong>
+                <span className="capitalize font-medium">
+                    {`${((pokemonSpecie.captureRate / 255) * 100).toFixed(1)}%`}
                 </span>
             </li>
             <li className="w-full flex flex-row gap-3">
                 <strong className="text-zinc-500">
                     Growth Rate:
                 </strong>
-                <span className="font-medium">
-                    {pokemonSpecie.growth_rate}
+                <span className="font-medium capitalize">
+                    {pokemonSpecie.growthRate}
                 </span>
             </li>
         </ul>
