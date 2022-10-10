@@ -1,6 +1,6 @@
 <p align="center">
-  <img alt="Pokedéx - JNeris" src=".github/logo-dark.svg#gh-dark-mode-only" width="160px">
-  <img alt="Pokedéx - JNeris" src=".github/logo-light.svg#gh-light-mode-only" width="160px">
+  <img alt="Pokedéx - JNeris" src=".github/logo-dark.svg#gh-dark-mode-only" width="322px">
+  <img alt="Pokedéx - JNeris" src=".github/logo-light.svg#gh-light-mode-only" width="322px">
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ This project was developed using the following technologies:
 
 ## 🔥 Preview
 
-The easiest way to deploy your app is to use[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+The easiest way to deploy your app is to use [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
 [<img alt="Pokedéx - JNeris" title="Event Platform" src=".github/deploy.svg" />](https://pokedex-jneris.vercel.app/)
 
