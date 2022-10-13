@@ -1,5 +1,6 @@
 import { Sidebar } from "phosphor-react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import { useTheme } from "../context/ThemeContext";
 import { PokemonTypesProps } from "../interfaces/interfaces";
@@ -62,7 +63,8 @@ export function Nav({ pokemon, switchMenu, stateMenu, options, setOptions }: Pro
                 <div id="dropdownAvatar" ref={refDropdown} className={`absolute right-0 z-10 w-32 mt-2 bg-zinc-50 dark:bg-zinc-800 rounded divide-y divide-zinc-200 dark:divide-zinc-700 shadow ${!options && 'hidden'}`}>
                     <ul className="py-1 text-sm text-zinc-700 dark:text-zinc-100" aria-labelledby="dropdownUserAvatarButton">
                         <li>
-                            <button className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">My Team</button>
+                            <button className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full
+                            pointer-events-none opacity-20">My Team</button>
                         </li>
                         <li>
                             <button onClick={handleToggleTheme} className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">
@@ -70,11 +72,12 @@ export function Nav({ pokemon, switchMenu, stateMenu, options, setOptions }: Pro
                             </button>
                         </li>
                         <li>
-                            <button className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">About</button>
+                            <Link to={"/about"} className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">About</Link>
                         </li>
                     </ul>
                     <div className="py-1">
-                        <button className="block py-2 px-4 text-sm text-zinc-700 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">Sign out</button>
+                        <button className="block py-2 px-4 text-sm text-zinc-700 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full
+                        pointer-events-none opacity-20">Sign out</button>
                     </div>
                 </div>
             </div>

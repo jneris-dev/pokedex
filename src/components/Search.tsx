@@ -47,11 +47,7 @@ export function Search({ value, onChange, filtered, filter, currentGeneration, s
         setFilters(!filters)
         filtered('')
         handleReset()
-        setGeneration({
-            text: "",
-            offset: 0,
-            limit: 0
-        })
+        setGeneration({} as GenerationsProps)
     }
 
     return (

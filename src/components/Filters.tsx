@@ -51,11 +51,7 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
     function resetFilters() {
         filtered('')
         show(false)
-        setGeneration({
-            text: "",
-            offset: 0,
-            limit: 0
-        })
+        setGeneration({} as GenerationsProps)
     }
 
     useEffect(() => {
