@@ -88,6 +88,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
             {pokemon ?
                 <div className="w-full h-auto relative py-5 px-6">
                     <header className="w-full text-center mb-10 relative">
+                        <span className="absolute text-8xl w-full top-36 block text-center whitespace-nowrap text-zinc-400 dark:text-zinc-600 pointer-events-none">{specieName}</span>
                         <nav className={`w-full absolute top-0 left-0 flex flex-row justify-between items-center z-10 ${pokemon.type && pokemon.type[0].color.text}`}>
                             <Nav
                                 pokemon={pokemon}
@@ -98,11 +99,13 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                             />
                         </nav>
                         <figure className="block mx-auto max-w-[375px] min-h-[375px] mb-2 relative figure-poke-full pt-5">
-                            <img
-                                src={pokemon.image}
-                                alt={`Imagem do pokémon ${name}`}
-                                className="w-full"
-                            />
+                            {pokemon.image &&
+                                <img
+                                    src={pokemon.image}
+                                    alt={`Imagem do pokémon ${name}`}
+                                    className="w-full"
+                                />
+                            }
                             <Pokeball />
                         </figure>
                         <p className="text-2xl font-bold text-zinc-400 dark:text-zinc-600 mb-3">
@@ -128,9 +131,6 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                         <h1 className="text-4xl font-bold text-zinc-800 dark:text-zinc-100 capitalize mb-2">
                             {name.replace("-", " ")}
                         </h1>
-                        <h2 className="text-2xl font-bold text-zinc-400 dark:text-zinc-600">
-                            {specieName}
-                        </h2>
                     </header>
                     <div className="w-full h-auto relative gap-5 flex md:flex-row flex-col max-w-[1024px] mx-auto">
                         <div className="w-full flex flex-col gap-5">
