@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import api from "../services/api";
 
@@ -11,6 +11,8 @@ import { typeDataKeys } from "../util/typesEffectiveness";
 import { X } from "phosphor-react";
 
 export function Home() {
+    const refScrollUp = useRef<any>()
+
     const NUMBER_POKEMONS = 25;
     const NUMBER_MAX_POKEMONS_API = 929;
 
@@ -61,6 +63,8 @@ export function Home() {
     const handlePokemonsListByGeneration = useCallback(async () => {
         setPokemons([]);
 
+        handleScrollTopPokemons();
+
         const limit = generation.limit
         const offset = generation.offset
         const response = await api.get(`/pokemon?limit=${limit}&offset=${offset}`);
@@ -102,9 +106,19 @@ export function Home() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function handleScrollTopPokemons() {
+        refScrollUp.current.style.height = "0px"
+
+        if(pokemons && pokemons.length > 0) {
+            refScrollUp.current.scrollTo({ top: 0, behavior: 'smooth' });
+            refScrollUp.current.style.height = ""
+        }
+    }
+
+
     return (
         <main className="w-full relative flex flex-row items-stretch">
-            <aside className={`
+            <aside ref={refScrollUp} className={`
 				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar scrollbar-none pb-5 bg-zinc-50 dark:bg-zinc-800 shadow-lg divide-y-2 dark:divide-zinc-700 
 				${openMenu ? "ml-0" : "lg:-ml-[400px] -ml-[350px]"}
 			`}>
@@ -126,7 +140,7 @@ export function Home() {
 
                             <button
                                 type="button"
-                                onClick={() => setFilterType('' as typeDataKeys)}
+                                onClick={() => {setFilterType('' as typeDataKeys), handleScrollTopPokemons()}}
                             >
                                 <X
                                     size={20}
@@ -145,7 +159,7 @@ export function Home() {
 
                             <button
                                 type="button"
-                                onClick={() => setGeneration({} as GenerationsProps)}
+                                onClick={() => {setGeneration({} as GenerationsProps), handleScrollTopPokemons()}}
                             >
                                 <X
                                     size={20}

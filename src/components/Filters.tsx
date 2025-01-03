@@ -47,8 +47,6 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
             handleTypeList();
     }, [state]);
 
-    console.log(types)
-
     return (
         <div id="modalFilters" tabIndex={-1} className="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 w-full h-full bg-opacity-80 bg-zinc-200 dark:bg-zinc-900 dark:bg-opacity-80 py-4">
             <div className="relative p-4 w-full max-w-2xl min-h-[calc(100%-1rem)] flex items-center mx-auto">
