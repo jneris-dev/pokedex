@@ -24,7 +24,9 @@ module.exports = {
           psychic: '#EA5D60',
           rock: '#BAAB82',
           steel: '#417D9A',
-          water: '#4A90DA'
+          water: '#4A90DA',
+          stellar: '#d1d1d1',
+          unknown: '#6FC996'
         },
         backgroundType: {
           bug: '#8BD674',
@@ -45,6 +47,8 @@ module.exports = {
           rock: '#D4C294',
           steel: '#4C91B2',
           water: '#58ABF6',
+          stellar: '#4A90DA',
+          unknown: '#81E5AD'
         },
       }
     },

@@ -1,17 +1,17 @@
-import { CaretLeft } from "phosphor-react";
+import { CaretLeft, Heart } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 export function About() {
     return (
-        <div className="w-full min-h-screen flex items-center justify-center flex-col gap-4 py-8 px-5">
+        <div className="w-full min-h-screen flex items-center justify-center flex-col gap-1 py-8 px-5">
             <div className="max-w-2xl w-full">
-                <Link to={"/"}>
-                    <CaretLeft size={32} className="block mr-auto cursor-pointer hover:text-zinc-300" />
+                <Link to={"/"} className="w-auto inline-flex">
+                    <CaretLeft size={32} className="cursor-pointer hover:text-zinc-300" />
                 </Link>
             </div>
-            <div className="max-w-2xl w-full bg-zinc-50 border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800 min-h-[500px] rounded shadow-lg flex flex-col items-center justify-center p-10">
+            <div className="max-w-2xl w-full bg-zinc-50 border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800 min-h-[500px] rounded shadow-lg flex flex-col items-center justify-center sm:p-10 p-8">
                 <img src="/pokedex-logo.png" className="max-w-full w-32 block mx-auto mb-3" alt="" />
-                <h1 className="text-2xl font-bold mb-2">
+                <h1 className="text-2xl font-bold mb-2 text-center">
                     About Project Pokedéx
                 </h1>
                 <strong className="block mb-5 text-zinc-500">
@@ -28,6 +28,18 @@ export function About() {
                         <strong className="text-zinc-200">Visit GitHub</strong>
                     </button>
                 </a>
+                <p className="flex items-center gap-1 mt-6">
+                    Pokedéx is made with <Heart size={15} weight="fill" className="text-red-500" /> by
+                    <a
+                        href="https://jneris.com.br/"
+                        target="_blank"
+                        rel="noopener"
+                        title="JNeris | Developer Front-end - Designer UI"
+                        className="text-indigo-500 hover:text-indigo-600 transition-colors"
+                    >
+                        JNeris
+                    </a>
+                </p>
             </div>
         </div>
     );

@@ -32,19 +32,7 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
         const response = await api.get('/type');
         const data = response.data.results
 
-        const removeUnknownType = data.findIndex((item: { name: string; }) => {
-            return item.name === "unknown";
-        });
-
-        const removeShadowType = data.findIndex((item: { name: string; }) => {
-            return item.name === "unknown";
-        });
-
-        if (removeUnknownType !== -1 && removeShadowType !== -1) {
-            data.splice(removeUnknownType, 1);
-            data.splice(removeShadowType, 1);
-            setTypes(data);
-        }
+        data && data.length > 0 ? setTypes(data) : setTypes([]);
 
     }, []);
 
@@ -55,11 +43,14 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
     }
 
     useEffect(() => {
-        handleTypeList();
+        if(state)
+            handleTypeList();
     }, [state]);
 
+    console.log(types)
+
     return (
-        <div id="modalFilters" tabIndex={-1} aria-hidden="true" className="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 w-full h-full bg-opacity-80 bg-zinc-200 dark:bg-zinc-900 dark:bg-opacity-80 py-4">
+        <div id="modalFilters" tabIndex={-1} className="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 w-full h-full bg-opacity-80 bg-zinc-200 dark:bg-zinc-900 dark:bg-opacity-80 py-4">
             <div className="relative p-4 w-full max-w-2xl min-h-[calc(100%-1rem)] flex items-center mx-auto">
                 <div className="relative bg-zinc-50 rounded-lg shadow dark:bg-zinc-800">
                     <div className="flex justify-between items-start p-6 rounded-t border-b dark:border-zinc-700">
@@ -82,17 +73,20 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
                                 Types:
                             </strong>
                             <div className="flex flex-row flex-wrap items-center gap-3">
-                                {types.map((type, index) => (
-                                    <React.Fragment key={index}>
-                                        <button
-                                            className={`hover:ring-2 hover:ring-offset-1 dark:hover:ring-offset-zinc-800 hover:ring-offset-zinc-50 dark:hover:ring-zinc-600 hover:ring-zinc-400 rounded
-                                        ${type.name === filter && "opacity-50 pointer-events-none"}`}
-                                            onClick={() => { filtered(type.name), show(false), clearSearch() }}
-                                        >
-                                            <TypeIcon rounded="md" padding="4" addClass="weaknesses-type-pokemon" type={type.name} />
-                                        </button>
-                                    </React.Fragment>
-                                ))}
+                                {types.map((type, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <button
+                                                className={`hover:ring-2 hover:ring-offset-1 dark:hover:ring-offset-zinc-800 hover:ring-offset-zinc-50 dark:hover:ring-zinc-600 hover:ring-zinc-400 rounded
+                                            ${type.name === filter && "opacity-50 pointer-events-none"}`}
+                                                onClick={() => { filtered(type.name), show(false), clearSearch() }}
+                                                title={type.name}
+                                            >
+                                                <TypeIcon rounded="md" padding="4" addClass="weaknesses-type-pokemon" type={type.name} />
+                                            </button>
+                                        </React.Fragment>
+                                    )
+                                })}
                             </div>
                         </div>
                         <div className="space-y-4">
@@ -192,7 +186,19 @@ export function Filters({ state, show, filtered, filter, clearSearch, currentGen
                                     setGeneration={setGeneration}
                                     text={"VIII"}
                                     offset={809}
-                                    limit={89}
+                                    limit={96}
+                                    closeModal={show}
+                                    removeFilterByType={filtered}
+                                />
+                                <Generation
+                                    poke_one="906"
+                                    poke_two="909"
+                                    poke_three="912"
+                                    currentGeneration={currentGeneration}
+                                    setGeneration={setGeneration}
+                                    text={"IX"}
+                                    offset={905}
+                                    limit={120}
                                     closeModal={show}
                                     removeFilterByType={filtered}
                                 />

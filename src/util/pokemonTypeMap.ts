@@ -107,4 +107,16 @@ export const PokemonTypeMap = {
         text: 'text-types-water',
         border: 'border-types-water',
     },
+    stellar: {
+        background: 'bg-backgroundType-stellar',
+        type: 'bg-types-stellar',
+        text: 'text-types-stellar',
+        border: 'border-types-stellar',
+    },
+    unknown: {
+        background: 'bg-backgroundType-unknown',
+        type: 'bg-types-unknown',
+        text: 'text-types-unknown',
+        border: 'border-types-unknown',
+    },
 }

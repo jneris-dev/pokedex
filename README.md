@@ -20,6 +20,7 @@ This project was developed using the following technologies:
 - [Tailwind](https://tailwindcss.com/)
 - [Phosphor](https://phosphoricons.com/)
 - [Axios](https://axios-http.com/ptbr/docs/intro)
+- [React Router Dom](https://reactrouter.com/en/v6.3.0/getting-started/overview)
 
 This project was developed using the following technologies:
 
@@ -52,6 +53,12 @@ The app will be available for access on your browser at http://localhost:3000
 
 To develop a web platform for listing and viewing pokemons, ReactJS was used to build this project. All data about pokémons such as name, number, type, image and among other things, were possible using the REST API [PokéApi](https://pokeapi.co/).
 
+## 🆕 Last Updates
+
+- Added Generation IX
+- Fixed bug in filters
+- Layout adjustments
+
 ## ☄ Next Updates
 
 - [x] Filter by type
@@ -61,13 +68,13 @@ To develop a web platform for listing and viewing pokemons, ReactJS was used to 
 - [x] Dark mode
 - [x] Skeleton
 - [x] Shiny versions
-- [ ] Criate my team
-- [ ] About project
+- [ ] Create my team
+- [x] About project
 - [ ] Github banner
 - [ ] Profile image github
 - [ ] Max-Min stats
 - [ ] Evolutions conditions
-- [ ] Loading More Bug
+- [x] Loading More Bug
 
 ## 📝 License
 

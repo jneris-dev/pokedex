@@ -59,6 +59,8 @@ export function Home() {
     }, [filterType]);
 
     const handlePokemonsListByGeneration = useCallback(async () => {
+        setPokemons([]);
+
         const limit = generation.limit
         const offset = generation.offset
         const response = await api.get(`/pokemon?limit=${limit}&offset=${offset}`);
@@ -103,10 +105,10 @@ export function Home() {
     return (
         <main className="w-full relative flex flex-row items-stretch">
             <aside className={`
-				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar-none pb-5 bg-zinc-50 dark:bg-zinc-800 shadow-lg divide-y-2 dark:divide-zinc-700 
+				w-full lg:max-w-[400px] sm:max-w-[350px] max-w-[320px] fixed left-0 top-0 z-30 h-screen transition-all duration-500 overflow-y-scroll scrollbar scrollbar-none pb-5 bg-zinc-50 dark:bg-zinc-800 shadow-lg divide-y-2 dark:divide-zinc-700 
 				${openMenu ? "ml-0" : "lg:-ml-[400px] -ml-[350px]"}
 			`}>
-                <div className="sticky top-0 z-10">
+                <div className="sticky top-0 z-10 w-full">
                     <Search
                         value={pokemonSearch}
                         onChange={setPokemonSearch}

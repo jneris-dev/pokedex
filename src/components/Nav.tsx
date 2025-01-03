@@ -64,7 +64,7 @@ export function Nav({ pokemon, switchMenu, stateMenu, options, setOptions }: Pro
                     <ul className="py-1 text-sm text-zinc-700 dark:text-zinc-100" aria-labelledby="dropdownUserAvatarButton">
                         <li>
                             <button className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full
-                            pointer-events-none opacity-20">My Team</button>
+                            pointer-events-none opacity-40">My Team</button>
                         </li>
                         <li>
                             <button onClick={handleToggleTheme} className="block py-2 px-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full">
@@ -77,7 +77,7 @@ export function Nav({ pokemon, switchMenu, stateMenu, options, setOptions }: Pro
                     </ul>
                     <div className="py-1">
                         <button className="block py-2 px-4 text-sm text-zinc-700 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-700 w-full
-                        pointer-events-none opacity-20">Sign out</button>
+                        pointer-events-none opacity-40">Sign out</button>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,8 @@ import { ReactComponent as TypePsychic } from '../assets/types/psychic.svg';
 import { ReactComponent as TypeRock } from '../assets/types/rock.svg';
 import { ReactComponent as TypeSteel } from '../assets/types/steel.svg';
 import { ReactComponent as TypeWater } from '../assets/types/water.svg';
+import { ReactComponent as TypeStellar } from '../assets/types/stellar.svg';
+import { ReactComponent as TypeUnknown } from '../assets/types/unknown.svg';
 
 export default {
     bug: <TypeBug />,
@@ -36,4 +38,6 @@ export default {
     rock: <TypeRock />,
     steel: <TypeSteel />,
     water: <TypeWater />,
+    stellar: <TypeStellar />,
+    unknown: <TypeUnknown />,
 };
