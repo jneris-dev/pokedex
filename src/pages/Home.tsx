@@ -23,9 +23,7 @@ export function Home() {
         sessionStorage.getItem('pokemon') || 'bulbasaur'
     );
     const [pokemonsOffsetApi, setPokemonsOffsetApi] = useState(NUMBER_POKEMONS);
-    const [openMenu, setOpenMenu] = useState(
-        window.innerWidth > 1024 ? true : false
-    );
+    const [openMenu, setOpenMenu] = useState(true);
     const [options, setOptions] = useState(false);
     const [filterType, setFilterType] = useState('' as typeDataKeys)
     const [pokemonByType, setPokemonByType] = useState<PokemonByTypeProps[]>([])
@@ -115,6 +113,15 @@ export function Home() {
         }
     }
 
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                setOpenMenu(true)
+            } else {
+                setOpenMenu(false)
+            }
+        })
+    }, [window.innerWidth])
 
     return (
         <main className="w-full relative flex flex-row items-stretch">

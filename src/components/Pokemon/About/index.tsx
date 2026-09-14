@@ -62,11 +62,15 @@ export function About({ pokemon }: Props) {
                 <strong className="text-zinc-500 min-w-[63px]">
                     About:
                 </strong>
-                <p className="capitalize font-medium">
+                <p className="font-medium">
                     {pokeDetails.flavorTextEntries &&
                         pokeDetails.flavorTextEntries.find(
                             (text) => text.language.name === "en"
-                        )?.flavor_text
+                        )!.flavor_text.replace(/\f/g, " ").toLocaleLowerCase().at(0)?.toUpperCase()
+                        +
+                        pokeDetails.flavorTextEntries.find(
+                            (text) => text.language.name === "en"
+                        )!.flavor_text.replace(/\f/g, " ").toLocaleLowerCase().slice(1)
                     }
                 </p>
             </li>

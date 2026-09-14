@@ -12,6 +12,7 @@ interface Props {
         name: string;
     }
     showDetail: (value: string) => void;
+    form: boolean;
 }
 
 interface PokemonVarietiesProps {
@@ -21,23 +22,22 @@ interface PokemonVarietiesProps {
     type: PokemonTypesProps[];
 }
 
-export function Varieties({ pokemon, showDetail }: Props) {
+export function Varieties({ pokemon, showDetail, form }: Props) {
     const [pokemonVarieties, setPokemonVarieties] = useState({} as PokemonVarietiesProps);
+    const apiUrl = form ? `/pokemon-form/${pokemon.name}` : `/pokemon/${pokemon.name}`;
 
     useEffect(() => {
-        api.get(`/pokemon/${pokemon.name}`).then(response => {
+        api.get(apiUrl).then(response => {
             const {
                 id,
                 sprites,
-                types
+                types,
             } = response.data;
 
             setPokemonVarieties({
                 id,
                 number: `#${'000'.substr(id.toString().length)}${id}`,
-                image:
-                    sprites.other['official-artwork'].front_default ||
-                    sprites.front_default,
+                image: sprites.other ? sprites.other['official-artwork'].front_default : sprites.front_default,
                 type: types.map((pokemonType: any) => {
                     const typeName = pokemonType.type.name as keyof typeof iconTypePokemon;
                     return {

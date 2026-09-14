@@ -9,7 +9,7 @@ import Pokeball from "../Pokeball";
 import { About } from "./About";
 import { Training } from "./Training";
 import { Stats } from "./Stats";
-import { Forms } from "./Forms";
+import { SpeciesVarieties } from "./Varieties";
 import { Evolves } from "./Evolves";
 import { Shiny } from "./Shiny";
 import { Weaknesses } from "./Weaknesses";
@@ -40,6 +40,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                 sprites,
                 types,
                 species,
+                forms,
             } = response.data;
 
             setPokemon({
@@ -67,6 +68,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                     icon: iconTypePokemon[pokemonType.type.name],
                     color: PokemonTypeMap[pokemonType.type.name],
                 })),
+                forms: forms,
             });
         });
     }, [name]);
@@ -88,7 +90,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
             {pokemon ?
                 <div className="w-full h-auto relative py-5 px-6">
                     <header className="w-full text-center mb-10 relative">
-                        <span className="absolute text-8xl w-full top-36 block text-center whitespace-nowrap text-zinc-400 dark:text-zinc-600 pointer-events-none">{specieName}</span>
+                        <span className="absolute md:text-8xl text-5xl w-full top-36 block text-center whitespace-nowrap text-zinc-400 dark:text-zinc-600 pointer-events-none">{specieName}</span>
                         <nav className={`w-full absolute top-0 left-0 flex flex-row justify-between items-center z-10 ${pokemon.type && pokemon.type[0].color.text}`}>
                             <Nav
                                 pokemon={pokemon}
@@ -190,7 +192,7 @@ export function Pokemon({ name, showDetail, switchMenu, stateMenu, options, setO
                                         Varieties
                                     </h3>
                                 </div>
-                                <Forms pokemon={pokemon} name={name} showDetail={showDetail} />
+                                <SpeciesVarieties pokemon={pokemon} name={name} showDetail={showDetail} />
                             </div>
                         </div>
                     </div>

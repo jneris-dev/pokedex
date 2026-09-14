@@ -43,6 +43,12 @@ export interface PokemonProps {
         specialDefense: number;
     };
     type: PokemonTypesProps[];
+    forms: PokemonFormsProps[];
+}
+
+export interface PokemonFormsProps {
+    name: string;
+    url: string;
 }
 
 export interface TypePokemonResponse {
